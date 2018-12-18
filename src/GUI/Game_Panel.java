@@ -16,6 +16,8 @@ public class Game_Panel extends JPanel {
 
 
 //git prova
+    public  int provaGit;
+
     public int colpi_caricatore = 4;
     public int colpi_sparati = 0;
     public Shot[] charger;
