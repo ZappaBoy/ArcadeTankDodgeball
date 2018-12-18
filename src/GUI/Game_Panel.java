@@ -15,7 +15,7 @@ public class Game_Panel extends JPanel {
     public Player player;
 
 
-
+//git prova
     public int colpi_caricatore = 4;
     public int colpi_sparati = 0;
     public Shot[] charger;
@@ -75,7 +75,7 @@ public class Game_Panel extends JPanel {
         g.drawImage(charger[3].bullet_img, charger[3].x_shot, charger[3].y_shot, charger[3].width_shot, charger[3].height_shot, null);
 
         g.drawImage(charger[2].bullet_img, charger[2].x_shot, charger[2].y_shot, charger[2].width_shot, charger[2].height_shot, null);
- 
+
         g.drawImage(charger[1].bullet_img, charger[1].x_shot, charger[1].y_shot, charger[1].width_shot, charger[1].height_shot, null);
 
         g.drawImage(charger[0].bullet_img, charger[0].x_shot, charger[0].y_shot, charger[0].width_shot, charger[0].height_shot, null);
