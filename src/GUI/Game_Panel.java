@@ -15,10 +15,6 @@ public class Game_Panel extends JPanel {
     public Player player;
 
 
-
-
-    public  int prova;
-
     public int colpi_caricatore = 4;
     public int colpi_sparati = 0;
     public Shot[] charger;
