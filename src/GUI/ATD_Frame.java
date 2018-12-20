@@ -49,6 +49,22 @@ public class ATD_Frame extends JFrame {
 
     }
 
+    public void inGame(boolean ingame){
 
 
+        if (ingame){
+
+            this.start_panel.setVisible(false);
+            this.game_panel.setVisible(true);
+            this.active_level.setVisible(true);
+            this.game_panel.setFocusable(true);
+            this.game_panel.requestFocus();
+
+        }else{
+
+            this.start_panel.setVisible(true);
+            this.game_panel.setVisible(false);
+            this.active_level.setVisible(false);
+        }
+    }
 }

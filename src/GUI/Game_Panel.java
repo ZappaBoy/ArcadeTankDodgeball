@@ -174,15 +174,6 @@ public class Game_Panel extends JPanel {
                     System.out.println(colpi_sparati);
 
                 }
-
-            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-
-
-                //new game
-               // statusGamechange(true);
-
-
-                }
             }
 
             repaint();
@@ -200,6 +191,15 @@ public class Game_Panel extends JPanel {
             if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 firePressed = false;
             }
+
+
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+
+
+
+            }
+
         }
 
         @Override
@@ -210,6 +210,10 @@ public class Game_Panel extends JPanel {
 
                 System.exit(0);
             }
+
+
+
+
         }
     }
 
@@ -363,11 +367,7 @@ public class Game_Panel extends JPanel {
 
         }else {
 
-            frame.start_panel.setVisible(true);
-            frame.game_panel.setVisible(false);
-            frame.active_level.setVisible(false);
-
-            inGame = true;
+            this.frame.inGame(false);
 
         }
     }
