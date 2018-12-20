@@ -56,14 +56,6 @@ public class Start_Panel extends JPanel {
         this.addMouseListener(new MyMouseListener());
 
         this.start_panel_img = Resources.getImage("/Resources/Start_Panel.png");
-
-
-
-
-
-
-
-
     }
 
     @Override

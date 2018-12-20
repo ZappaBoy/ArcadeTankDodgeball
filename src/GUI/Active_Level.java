@@ -77,6 +77,6 @@ public class Active_Level extends JPanel {
 
         gameLevel++;
         activeLevel++;
-        enemiesNumber = levels[activeLevel - 1].enemies_number;
+        enemiesNumber = levels[activeLevel - 1].getEnemies_number();
     }
 }

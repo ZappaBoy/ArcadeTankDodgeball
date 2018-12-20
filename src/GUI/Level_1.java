@@ -14,11 +14,10 @@ public class Level_1 extends Level{
         enemyLevel2_number = 0;
         enemyLevel3_number = 0;
 
-
-        enemies_number = getEnemies_number();
-
-        enemies = new Enemy[enemies_number];
+        enemies = new Enemy[getEnemies_number()];
 
         enemies[0] = new Enemy_Level1();
+
+
     }
 }

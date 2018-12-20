@@ -18,12 +18,10 @@ public class Enemy {
         if (isHitted){
             isalive = false;
             tank_img = null;
-            x = 0;
-            y = 0;
+            x = 800;
+            y = 800;
             height = 0;
             width =0;
-            level = 0;
-
         }
     }
 

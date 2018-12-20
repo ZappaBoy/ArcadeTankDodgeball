@@ -23,6 +23,7 @@ public class Shot extends Rectangle {
         x_shot = x_Tank + (width_Tank/2);
         y_shot = y_Tank + (height_Tank/3);
 
+
         bullet_img = Resources.getImage("/Resources/bullet_img.png");
     }
 
@@ -35,7 +36,7 @@ public class Shot extends Rectangle {
 
             if (x_shot < x_frame) {
 
-                this.x_shot += 10;
+                this.x_shot += 20;
 
             } else {
                 end_shot = true;

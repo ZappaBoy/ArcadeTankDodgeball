@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferStrategy;
 
+import Enemies.Enemy;
 import GameLogic.Shot;
 import Player.Player;
 import Utility.Resources;
@@ -279,39 +280,25 @@ public class Game_Panel extends JPanel {
 
                 while(!charger[colpo_attivo].shotted(true) ){
 
-                    charger[colpo_attivo].shotted(true);
-
                     frame.game_panel.repaint();
 
-                    for (int i = 0; i < frame.active_level.enemiesNumber; i++) {             //Implementare per tutti i livelli dei nemici
+                    for (int i = 0; i < frame.active_level.levels[frame.active_level.activeLevel - 1].getEnemies_number(); i++) {             //Implementare per tutti i livelli dei nemici
 
-                        System.out.println(frame.active_level.enemiesNumber);                   //il for gira tutti i tank anche quelli colpiti
-
-                        if (frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].isalive && enemy_hitted( frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].x, frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].y, charger[colpo_attivo])) {
+                        if (frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].isalive && enemy_hitted(frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i], charger[colpo_attivo])) {
 
                             tank_hitted++;
 
-                            charger[colpo_attivo].shotted(false);
-
                             frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].isHitted(true);
 
-//                            System.out.println("I: " + i);
+                            if (tank_hitted == frame.active_level.levels[frame.active_level.activeLevel - 1].getEnemies_number()) {
 
-                            System.out.println("Nemico colpito");
-
-                            System.out.println("TankHitted: " + tank_hitted + " enemyN: " + frame.active_level.enemiesNumber);
-
-
-                            if (tank_hitted == frame.active_level.enemiesNumber) {
-
-                                System.out.println("TankHitted: " + tank_hitted + " enemyN: " + frame.active_level.enemiesNumber);
+                                tank_hitted = 0;
 
                                 JOptionPane.showMessageDialog(frame, "You hit all enemy tanks.");
 
-                                inGame = false;
-
-                                statusGamechange(inGame);
+                                statusGamechange(false);
                             }
+
                         }else {
 
                             System.out.println("nemico NON COLPITO");
@@ -326,7 +313,6 @@ public class Game_Panel extends JPanel {
                         e.printStackTrace();
                     }
                 }
-
             }
         }
     }
@@ -349,7 +335,6 @@ public class Game_Panel extends JPanel {
             }
 
             colpi_sparati = 0;
-
         }
     }
 
@@ -359,19 +344,16 @@ public class Game_Panel extends JPanel {
      *     Metodo nemico colpito
      */
 
-    public boolean enemy_hitted(int tank_x, int tank_y, Shot shot) {
+    public boolean enemy_hitted(Enemy enemy, Shot shot) {
 
-        boolean hitted = false;
+        boolean isHitted = false;
 
+        if ((shot.x_shot >= enemy.x && shot.x_shot <= enemy.x + enemy.width) && (shot.y_shot >= enemy.y && shot.y_shot <= enemy.y + enemy.height)){
 
-
-        if (shot.x_shot >= tank_x && shot.y_shot >= tank_y){
-
-            hitted = true;
+            isHitted = true;
         }
 
-        return hitted;
-
+        return isHitted;
     }
 
 
