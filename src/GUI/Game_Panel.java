@@ -37,22 +37,6 @@ public class Game_Panel extends JPanel {
         frame = pframe;
 
         statusGamechange(inGame);
-//        player = new Player(player_level);
-//
-//        this.addKeyListener(new Keyboard_Input());
-//
-//        this.setSize(800, 800);
-//
-//        this.game_panel_img = Resources.getImage("/Resources/First_Level_Background.png");
-//
-//        charger = new Shot[colpi_caricatore];
-//
-//        chargerThread = new threadBullet[colpi_caricatore];
-//
-//        for (int i = 0; i < colpi_caricatore; i++){
-//
-//            charger[i] = new Shot(800,800,0,0);
-//        }
     }
 
 
@@ -97,30 +81,6 @@ public class Game_Panel extends JPanel {
 
         frameStrategy.show();
     }
-
-
-//
-//    public void initGame(){
-//
-//        player = new Player(player_level);
-//
-//        this.addKeyListener(new Keyboard_Input());
-//
-//        this.setSize(800, 800);
-//
-//        this.game_panel_img = Resources.getImage("/Resources/First_Level_Background.png");
-//
-//        charger = new Shot[colpi_caricatore];
-//
-//       chargerThread = new threadBullet[colpi_caricatore];
-//
-//        for (int i = 0; i < colpi_caricatore; i++){
-//
-//            charger[i] = new Shot(800,800,0,0);
-//            chargerThread[i] = new threadBullet();
-//        }
-//    }
-
 
     /**
      * Comandi Tastiera
@@ -246,8 +206,8 @@ public class Game_Panel extends JPanel {
         public void keyTyped(KeyEvent e) {
             // Funzione tasto Escape
             if (e.getKeyChar() == 27) {
-
                 escapePressed = true;
+
                 System.exit(0);
             }
         }
@@ -278,11 +238,13 @@ public class Game_Panel extends JPanel {
 
                 charger[colpo_attivo] = new Shot(player.x, player.y, player.getWidth(), player.getHeight());
 
-                while(!charger[colpo_attivo].shotted(true) ){
+                while(!charger[colpo_attivo].shotted(true) && (tank_hitted < frame.active_level.enemiesNumber) && !charger[colpo_attivo].hit) {
 
                     frame.game_panel.repaint();
 
-                    for (int i = 0; i < frame.active_level.levels[frame.active_level.activeLevel - 1].getEnemies_number(); i++) {             //Implementare per tutti i livelli dei nemici
+                    int i = 0;
+
+                    while (i < frame.active_level.enemiesNumber && !charger[colpo_attivo].hit) {
 
                         if (frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].isalive && enemy_hitted(frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i], charger[colpo_attivo])) {
 
@@ -290,29 +252,41 @@ public class Game_Panel extends JPanel {
 
                             frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].isHitted(true);
 
-                            if (tank_hitted == frame.active_level.levels[frame.active_level.activeLevel - 1].getEnemies_number()) {
+                            charger[colpo_attivo].shotHit();
+
+                            if (tank_hitted == frame.active_level.enemiesNumber) {
 
                                 tank_hitted = 0;
 
-                                JOptionPane.showMessageDialog(frame, "You hit all enemy tanks.");
+                                for (int j = 0; j < colpi_caricatore; j++){
+
+                                    charger[j].shotHit();
+                                }
+
+                                JOptionPane.showMessageDialog(frame, "You hit all enemy tanks!");
 
                                 statusGamechange(false);
-                            }
 
-                        }else {
+                                frame.active_level.nextLevel();
+                            }
+                        } else {
 
                             System.out.println("nemico NON COLPITO");
                         }
+
+                        i++;
+
                     }
 
                     try {
 
-                        Thread.sleep(50);
+                            Thread.sleep(50);
 
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
                     }
-                }
             }
         }
     }

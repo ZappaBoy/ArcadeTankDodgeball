@@ -17,6 +17,7 @@ public class Shot extends Rectangle {
 
     private int x_frame = 800;
     private int y_frame = 800;
+    public boolean hit = false;
 
     public Shot(int x_Tank, int y_Tank, int width_Tank, int height_Tank) {
 
@@ -32,7 +33,7 @@ public class Shot extends Rectangle {
          boolean end_shot;
          end_shot = false;
 
-        if (isShotted) {
+        if (isShotted && !hit) {
 
             if (x_shot < x_frame) {
 
@@ -45,6 +46,20 @@ public class Shot extends Rectangle {
         }
 
          return end_shot;
+    }
+
+    public void shotHit(){
+
+      bullet_img = null;
+
+      x_shot = 0;
+      y_shot = 0;
+      width_shot = 0;
+      height_shot = 0;
+
+      x_frame = 0;
+      y_frame = 0;
+      hit = true;
     }
 
 }

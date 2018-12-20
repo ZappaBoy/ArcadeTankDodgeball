@@ -82,7 +82,7 @@ public class Start_Panel extends JPanel {
                 frame.game_panel.setFocusable(true);
                 frame.game_panel.requestFocus();
 
-                frame.active_level.nextLevel();
+                //frame.active_level.nextLevel();
 
               //  frame.game_panel.tank_hitted = 0;
             }
@@ -90,7 +90,7 @@ public class Start_Panel extends JPanel {
             if (credits_button.contains(e.getPoint())) {
 
                 frame.start_panel.setVisible(false);
-                //       frame.credits_panel.setVisible(true);
+                frame.credits_panel.setVisible(true);
 
             }
 

@@ -5,9 +5,9 @@ import java.awt.*;
 
 public class Active_Level extends JPanel {
 
-    private int gameLevel = 0;
+    private int gameLevel = 1;
 
-    public int enemiesNumber = 0;
+    public int enemiesNumber = 1;
 
     private ATD_Frame frame;
 
@@ -15,7 +15,7 @@ public class Active_Level extends JPanel {
 
     public int levels_numbers = 3;
 
-    public int activeLevel = 0;
+    public int activeLevel = 1;
 
 
     Active_Level(ATD_Frame pframe){
