@@ -221,6 +221,8 @@ public class Game_Panel extends JPanel {
         @Override
         public void run() {
 
+            Thread ricaricaThread = new RicaricaThread();
+
             if (colpi_sparati < colpi_caricatore ){
 
                 int colpo_attivo = colpi_sparati;
@@ -230,9 +232,6 @@ public class Game_Panel extends JPanel {
                 System.out.println(colpi_sparati + ";" + colpo_attivo );
 
                 if (colpi_sparati >= colpi_caricatore){
-
-                    Thread ricaricaThread = new RicaricaThread();
-
                     ricaricaThread.start();
                 }
 
@@ -309,6 +308,8 @@ public class Game_Panel extends JPanel {
             }
 
             colpi_sparati = 0;
+
+            //scritta ricarica
         }
     }
 
