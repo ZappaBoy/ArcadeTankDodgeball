@@ -1,6 +1,7 @@
 package GameLogic;
 
 
+import Player.Player;
 import Utility.Resources;
 import java.awt.*;
 
@@ -14,30 +15,34 @@ public class Shot extends Rectangle {
     public int y_shot;
     public int width_shot = 30;
     public int height_shot = 30;
+    public int speed_movement = 15;
 
     private int x_frame = 800;
     private int y_frame = 800;
     public boolean hit = false;
 
-    public Shot(int x_Tank, int y_Tank, int width_Tank, int height_Tank) {
+    public Shot(Player player) {
 
-        x_shot = x_Tank + (width_Tank/2);
-        y_shot = y_Tank + (height_Tank/3);
+        x_shot = player.x + (player.getWidth()/2);
+        y_shot = player.y + (player.getHeight()/3);
 
 
-        bullet_img = Resources.getImage("/Resources/bullet_img.png");
     }
 
-     public boolean shotted(boolean isShotted){
 
-         boolean end_shot;
+
+    public boolean shotted(boolean isShotted){
+
+        bullet_img = Resources.getImage("/Resources/bullet_img.png");
+
+        boolean end_shot;
          end_shot = false;
 
         if (isShotted && !hit) {
 
             if (x_shot < x_frame) {
 
-                this.x_shot += 20;
+                this.x_shot += speed_movement;
 
             } else {
                 end_shot = true;

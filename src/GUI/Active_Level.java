@@ -34,43 +34,57 @@ public class Active_Level extends JPanel {
 
         //fa schifo senza un cristo di for!!!!!!!
 
-       if (gameLevel == 1 && levels[0].enemies[0].isalive ){
 
-           g.drawImage(levels[gameLevel - 1].enemies[0].tank_img, levels[gameLevel - 1].enemies[0].x, levels[gameLevel - 1].enemies[0].y, levels[gameLevel - 1].enemies[0].width, levels[gameLevel - 1].enemies[0].height, null );
+        for (int i = 0; i < enemiesNumber; i++){
 
-       }if (gameLevel == 2){
+            for (int j = 0; j < levels[gameLevel - 1].enemies[i].charger_capacity; j++){
 
-           if (levels[gameLevel - 1].enemies[0].isalive){
+                g.drawImage(levels[gameLevel - 1].enemies[i].tank_img, levels[gameLevel - 1].enemies[i].x, levels[gameLevel - 1].enemies[i].y, levels[gameLevel - 1].enemies[i].width, levels[gameLevel - 1].enemies[i].height, null );
 
-               g.drawImage(levels[1].enemies[0].tank_img, levels[1].enemies[0].x, levels[1].enemies[0].y, levels[1].enemies[0].width, levels[1].enemies[0].height, null );
+                g.drawImage(levels[gameLevel - 1].enemies[i].enemyCharger[j].bullet_img, levels[gameLevel - 1].enemies[i].enemyCharger[j].x_shot, levels[gameLevel - 1].enemies[i].enemyCharger[j].y_shot, levels[gameLevel - 1].enemies[i].enemyCharger[j].width_shot, levels[gameLevel - 1].enemies[i].enemyCharger[j].height_shot, null );
 
-           }
-
-           if (levels[gameLevel - 1].enemies[1].isalive){
-
-               g.drawImage(levels[gameLevel - 1].enemies[1].tank_img, levels[gameLevel - 1].enemies[1].x, levels[gameLevel - 1].enemies[1].y, levels[gameLevel - 1].enemies[1].width, levels[gameLevel - 1].enemies[1].height, null );
-
-            }
-
-       }if (gameLevel == 3){
-
-           if (levels[gameLevel - 1].enemies[0].isalive){
-
-               g.drawImage(levels[gameLevel - 1].enemies[0].tank_img, levels[gameLevel - 1].enemies[0].x, levels[gameLevel - 1].enemies[0].y, levels[2].enemies[0].width, levels[gameLevel - 1].enemies[0].height, null );
-
-           }
-
-            if (levels[gameLevel - 1].enemies[1].isalive){
-
-                g.drawImage(levels[gameLevel - 1].enemies[1].tank_img, levels[gameLevel - 1].enemies[1].x, levels[gameLevel - 1].enemies[1].y, levels[gameLevel - 1].enemies[1].width, levels[gameLevel - 1].enemies[1].height, null );
-            }
-
-            if (levels[gameLevel - 1].enemies[2].isalive){
-
-                g.drawImage(levels[gameLevel - 1].enemies[2].tank_img, levels[gameLevel - 1].enemies[2].x, levels[gameLevel - 1].enemies[2].y, levels[gameLevel - 1].enemies[2].width, levels[gameLevel - 1].enemies[2].height, null );
 
             }
         }
+
+
+//       if (gameLevel == 1 && levels[0].enemies[0].isalive ){
+//
+//           g.drawImage(levels[gameLevel - 1].enemies[0].tank_img, levels[gameLevel - 1].enemies[0].x, levels[gameLevel - 1].enemies[0].y, levels[gameLevel - 1].enemies[0].width, levels[gameLevel - 1].enemies[0].height, null );
+//
+//       }if (gameLevel == 2){
+//
+//           if (levels[gameLevel - 1].enemies[0].isalive){
+//
+//               g.drawImage(levels[1].enemies[0].tank_img, levels[1].enemies[0].x, levels[1].enemies[0].y, levels[1].enemies[0].width, levels[1].enemies[0].height, null );
+//
+//           }
+//
+//           if (levels[gameLevel - 1].enemies[1].isalive){
+//
+//               g.drawImage(levels[gameLevel - 1].enemies[1].tank_img, levels[gameLevel - 1].enemies[1].x, levels[gameLevel - 1].enemies[1].y, levels[gameLevel - 1].enemies[1].width, levels[gameLevel - 1].enemies[1].height, null );
+//
+//            }
+//
+//       }if (gameLevel == 3){
+//
+//           if (levels[gameLevel - 1].enemies[0].isalive){
+//
+//               g.drawImage(levels[gameLevel - 1].enemies[0].tank_img, levels[gameLevel - 1].enemies[0].x, levels[gameLevel - 1].enemies[0].y, levels[2].enemies[0].width, levels[gameLevel - 1].enemies[0].height, null );
+//
+//           }
+//
+//            if (levels[gameLevel - 1].enemies[1].isalive){
+//
+//                g.drawImage(levels[gameLevel - 1].enemies[1].tank_img, levels[gameLevel - 1].enemies[1].x, levels[gameLevel - 1].enemies[1].y, levels[gameLevel - 1].enemies[1].width, levels[gameLevel - 1].enemies[1].height, null );
+//            }
+//
+//            if (levels[gameLevel - 1].enemies[2].isalive){
+//
+//                g.drawImage(levels[gameLevel - 1].enemies[2].tank_img, levels[gameLevel - 1].enemies[2].x, levels[gameLevel - 1].enemies[2].y, levels[gameLevel - 1].enemies[2].width, levels[gameLevel - 1].enemies[2].height, null );
+//
+//            }
+//        }
     }
 
     public void nextLevel() {

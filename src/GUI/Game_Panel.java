@@ -16,7 +16,7 @@ public class Game_Panel extends JPanel {
     public Player player;
 
 
-    public int charger_capacity = 4;
+    public int charger_capacity = 3;
     public int shootted_bullet = 0;
     public Shot[] charger;
     public threadPlayerBullet[] chargerThread;
@@ -26,10 +26,14 @@ public class Game_Panel extends JPanel {
 
     private ATD_Frame frame;
 
-    public  int enemy_tank_hitted = 0;
-    public  int missed_shot = 0;
-    public  int used_charger = 0;
-    public  int used_bullet = 0;
+    public int enemy_tank_hitted = 0;
+    public int missed_shot = 0;
+    public int used_charger = 0;
+    public int used_bullet = 0;
+    public boolean readyToshot = true;
+
+    private Thread thread_Delay = new threadDelay();
+
 
 
 
@@ -40,6 +44,7 @@ public class Game_Panel extends JPanel {
         frame = pframe;
 
         statusGamechange(inGame);
+
     }
 
 
@@ -59,13 +64,20 @@ public class Game_Panel extends JPanel {
 
         //cascata
 
-        g.drawImage(charger[3].bullet_img, charger[3].x_shot, charger[3].y_shot, charger[3].width_shot, charger[3].height_shot, null);
+        for (int i = 0; i < charger_capacity; i++){
 
-        g.drawImage(charger[2].bullet_img, charger[2].x_shot, charger[2].y_shot, charger[2].width_shot, charger[2].height_shot, null);
+        g.drawImage(charger[i].bullet_img, charger[i].x_shot, charger[i].y_shot, charger[i].width_shot, charger[i].height_shot, null);
 
-        g.drawImage(charger[1].bullet_img, charger[1].x_shot, charger[1].y_shot, charger[1].width_shot, charger[1].height_shot, null);
+        }
 
-        g.drawImage(charger[0].bullet_img, charger[0].x_shot, charger[0].y_shot, charger[0].width_shot, charger[0].height_shot, null);
+//
+//        g.drawImage(charger[3].bullet_img, charger[3].x_shot, charger[3].y_shot, charger[3].width_shot, charger[3].height_shot, null);
+//
+//        g.drawImage(charger[2].bullet_img, charger[2].x_shot, charger[2].y_shot, charger[2].width_shot, charger[2].height_shot, null);
+//
+//        g.drawImage(charger[1].bullet_img, charger[1].x_shot, charger[1].y_shot, charger[1].width_shot, charger[1].height_shot, null);
+//
+//        g.drawImage(charger[0].bullet_img, charger[0].x_shot, charger[0].y_shot, charger[0].width_shot, charger[0].height_shot, null);
 
         frame.active_level.paintComponents(g);
 
@@ -168,14 +180,19 @@ public class Game_Panel extends JPanel {
 
                 firePressed = true;
 
-                if (shootted_bullet < charger_capacity) {
+                if (readyToshot) {
 
-                    chargerThread[shootted_bullet] = new threadPlayerBullet();
+                    readyToshot = false;
 
-                    chargerThread[shootted_bullet].start();
+                    if (shootted_bullet < charger_capacity) {
 
-                    System.out.println(shootted_bullet);
+                        chargerThread[shootted_bullet] = new threadPlayerBullet();
 
+                        chargerThread[shootted_bullet].start();
+
+                        System.out.println(shootted_bullet);
+
+                    }
                 }
             }
 
@@ -241,7 +258,7 @@ public class Game_Panel extends JPanel {
                     ricaricaThread.start();
                 }
 
-                charger[active_shot] = new Shot(player.x, player.y, player.getWidth(), player.getHeight());
+                charger[active_shot] = new Shot(player);
 
                 while(!charger[active_shot].shotted(true) && (enemy_tank_hitted < frame.active_level.enemiesNumber) && !charger[active_shot].hit) {
 
@@ -306,7 +323,7 @@ public class Game_Panel extends JPanel {
 
 
     /**
-     *     Metodo RicaricaThread caricatore
+     *     Thread ricarica colpi caricatore
      */
     public class RicaricaThread extends Thread implements Runnable{
 
@@ -329,6 +346,35 @@ public class Game_Panel extends JPanel {
         }
     }
 
+
+
+
+
+    /**
+     *     thread delay tra colpi caricatore
+     */
+    public class threadDelay extends Thread implements Runnable{
+
+        @Override
+        public void run() {
+
+            while (inGame){
+
+                readyToshot = !readyToshot;
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
+                System.out.println("delay: " + readyToshot);
+            }
+
+            //scritta ricarica
+        }
+    }
 
 
     /**
@@ -371,11 +417,15 @@ public class Game_Panel extends JPanel {
 
             for (int i = 0; i < charger_capacity; i++){
 
-                charger[i] = new Shot(800,800,0,0);
+                charger[i] = new Shot(player);
                 chargerThread[i] = new threadPlayerBullet();
             }
 
             enemy_tank_hitted = 0;
+
+
+            thread_Delay.start();
+
 
             System.out.println("Status ingame true");
 
