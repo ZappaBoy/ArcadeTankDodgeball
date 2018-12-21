@@ -14,6 +14,8 @@ public class ATD_Frame extends JFrame {
     Active_Level active_level;
     Credits_Panel credits_panel;
 
+    private boolean inGame = false;
+
 
 
     public ATD_Frame() {
@@ -60,11 +62,51 @@ public class ATD_Frame extends JFrame {
             this.game_panel.setFocusable(true);
             this.game_panel.requestFocus();
 
+            inGame = true;
+
+
+            if (active_level.activeLevel == 1){
+
+
+                for (int i = 0; i < this.active_level.enemiesNumber; i++){
+
+                    this.active_level.levels[active_level.activeLevel - 1].enemies[i].threadEnemylogic.start();
+                }
+
+            }
+
+            Thread threadGameRepaint = new repaintThread();
+            threadGameRepaint.start();
+
+
+
         }else{
 
             this.start_panel.setVisible(true);
             this.game_panel.setVisible(false);
             this.active_level.setVisible(false);
+            inGame = false;
         }
     }
+
+
+    private class repaintThread extends Thread implements Runnable{
+
+        @Override
+        public void run() {
+
+            while (true){
+
+                game_panel.repaint();
+
+                try {
+                    Thread.sleep(20);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
+
 }

@@ -19,14 +19,14 @@ public class Game_Panel extends JPanel {
     public int charger_capacity = 4;
     public int shootted_bullet = 0;
     public Shot[] charger;
-    public threadBullet[] chargerThread;
+    public threadPlayerBullet[] chargerThread;
     public boolean inGame = true;
 
     public int player_level = 1;
 
     private ATD_Frame frame;
 
-    public  int tank_hitted = 0;
+    public  int enemy_tank_hitted = 0;
     public  int missed_shot = 0;
     public  int used_charger = 0;
     public  int used_bullet = 0;
@@ -52,7 +52,7 @@ public class Game_Panel extends JPanel {
 
         g.drawImage(game_panel_img, 0, 0, 800, 800, null);
 
-        frame.active_level.repaint();
+//        frame.active_level.repaint();
 
         //PLAYER
         g.drawImage(player.tank_img, player.x, player.y, player.getWidth(), player.getHeight(), null);
@@ -67,7 +67,10 @@ public class Game_Panel extends JPanel {
 
         g.drawImage(charger[0].bullet_img, charger[0].x_shot, charger[0].y_shot, charger[0].width_shot, charger[0].height_shot, null);
 
+        frame.active_level.paintComponents(g);
+
         onDraw();
+
     }
 
 
@@ -112,9 +115,6 @@ public class Game_Panel extends JPanel {
             right_collider = 330;
             up_collider = 0;
             down_collider = 700;
-
-
-
 
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 
@@ -170,7 +170,7 @@ public class Game_Panel extends JPanel {
 
                 if (shootted_bullet < charger_capacity) {
 
-                    chargerThread[shootted_bullet] = new threadBullet();
+                    chargerThread[shootted_bullet] = new threadPlayerBullet();
 
                     chargerThread[shootted_bullet].start();
 
@@ -197,9 +197,8 @@ public class Game_Panel extends JPanel {
 
 
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-
-
-
+                
+                
 
             }
 
@@ -213,17 +212,13 @@ public class Game_Panel extends JPanel {
 
                 System.exit(0);
             }
-
-
-
-
         }
     }
 
     /**
-     *          Thread colpo
+     *          Thread colpo Player
      */
-    private class threadBullet extends Thread implements Runnable{
+    private class threadPlayerBullet extends Thread implements Runnable{
 
         @Override
         public void run() {
@@ -240,7 +235,7 @@ public class Game_Panel extends JPanel {
 
                 System.out.println("Colpi utilizzati" + used_bullet);
 
-                System.out.println(shootted_bullet + ";" + active_shot );
+                //System.out.println(shootted_bullet + ";" + active_shot );
 
                 if (shootted_bullet >= charger_capacity){
                     ricaricaThread.start();
@@ -248,7 +243,7 @@ public class Game_Panel extends JPanel {
 
                 charger[active_shot] = new Shot(player.x, player.y, player.getWidth(), player.getHeight());
 
-                while(!charger[active_shot].shotted(true) && (tank_hitted < frame.active_level.enemiesNumber) && !charger[active_shot].hit) {
+                while(!charger[active_shot].shotted(true) && (enemy_tank_hitted < frame.active_level.enemiesNumber) && !charger[active_shot].hit) {
 
                     frame.game_panel.repaint();
 
@@ -258,7 +253,7 @@ public class Game_Panel extends JPanel {
 
                         if (frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].isalive && enemy_hitted(frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i], charger[active_shot])) {
 
-                            tank_hitted++;
+                            enemy_tank_hitted++;
 
                             missed_shot --;
 
@@ -266,11 +261,9 @@ public class Game_Panel extends JPanel {
 
                             charger[active_shot].shotHit();
 
+                            if (enemy_tank_hitted == frame.active_level.enemiesNumber) {
 
-
-                            if (tank_hitted == frame.active_level.enemiesNumber) {
-
-                                tank_hitted = 0;
+                                enemy_tank_hitted = 0;
 
                                 for (int j = 0; j < charger_capacity; j++){
 
@@ -288,18 +281,13 @@ public class Game_Panel extends JPanel {
                             }
                         } else {
 
-
                             System.out.println("colpi mancati: " + missed_shot);
                         }
 
                         i++;
-
-
-
                     }
 
                     try {
-
                             Thread.sleep(50);
 
                         } catch (InterruptedException e) {
@@ -311,8 +299,6 @@ public class Game_Panel extends JPanel {
                 missed_shot ++;
 
             }
-
-
         }
     }
 
@@ -364,7 +350,7 @@ public class Game_Panel extends JPanel {
 
 
     /**
-     *     Metodo nemico colpito
+     *     Metodo cambio stato di gioco
      */
 
     public void statusGamechange (boolean inGame){
@@ -381,22 +367,30 @@ public class Game_Panel extends JPanel {
 
             charger = new Shot[charger_capacity];
 
-            chargerThread = new threadBullet[charger_capacity];
+            chargerThread = new threadPlayerBullet[charger_capacity];
 
             for (int i = 0; i < charger_capacity; i++){
 
                 charger[i] = new Shot(800,800,0,0);
-                chargerThread[i] = new threadBullet();
+                chargerThread[i] = new threadPlayerBullet();
             }
 
-            tank_hitted = 0;
+            enemy_tank_hitted = 0;
+
+            System.out.println("Status ingame true");
+
+
 
         }else {
 
             this.frame.inGame(false);
+            System.out.println("Status ingame false");
 
         }
     }
+
+
+
 }
 
 

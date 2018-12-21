@@ -29,8 +29,8 @@ public class Active_Level extends JPanel {
         levels[2] = new Level_3();
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
+
+    public void paintComponents(Graphics g) {
 
         //fa schifo senza un cristo di for!!!!!!!
 
@@ -81,6 +81,14 @@ public class Active_Level extends JPanel {
             gameLevel++;
             activeLevel++;
             enemiesNumber = levels[activeLevel - 1].getEnemies_number();
+
+            for (int i = 0; i < frame.active_level.enemiesNumber; i++){
+
+                frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].threadEnemylogic.start();
+
+            }
+
+
         }else{
 
             JOptionPane.showMessageDialog(frame, "You complete all levels!");
