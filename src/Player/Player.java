@@ -13,20 +13,25 @@ public class Player {
 
     public int x = 10;
     public int y = 360;
+    public int level = 1;
+    public int color = 1;
 
     private final int height = 80;
     private final int width = 80;
 
-    public int speed =7;
+    public int speed = 8;
 
 
     public Image tank_img;
 
+    //
    // private Attack attack_type;
 
- public Player (int level){
 
-     this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + "_img.png" );
+ public Player (){
+
+
+     playerImageinit();
 
 
     }
@@ -68,4 +73,43 @@ public class Player {
 
     }
 
+    public String playerImageinit(){
+
+     String colore;
+
+     colore = "_Green";
+
+     if (color == 1){
+
+         colore = "_Green";
+         this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
+
+     }
+
+
+     if (color == 2){
+
+            colore = "_Red";
+         this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
+
+     }
+
+
+     if (color == 3){
+
+            colore = "_Blue";
+         this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
+
+     }
+
+     return colore;
+
+    }
+
+    public void levelUp(){
+
+     level++;
+     color ++;
+     playerImageinit();
+    }
 }

@@ -20,7 +20,7 @@ public class Enemy_Level1 extends Enemy{
         level = 1;
 
 
-        this.tank_img = Resources.getImage("/Resources/Enemy_Tank_Level1_img.png" );
+        this.tank_img = Resources.getImage("/Resources/Enemy_Tank_Level1_Red_img.png" );
 
 
 

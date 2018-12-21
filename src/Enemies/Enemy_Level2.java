@@ -21,7 +21,7 @@ public class Enemy_Level2 extends Enemy {
         level = 2;
 
 
-        this.tank_img = Resources.getImage("/Resources/Enemy_Tank_Level2_img.png" );
+        this.tank_img = Resources.getImage("/Resources/Enemy_Tank_Level2_Blue_img.png" );
 
 
 

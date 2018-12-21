@@ -16,8 +16,8 @@ public class Game_Panel extends JPanel {
     public Player player;
 
 
-    public int colpi_caricatore = 4;
-    public int colpi_sparati = 0;
+    public int charger_capacity = 4;
+    public int shootted_bullet = 0;
     public Shot[] charger;
     public threadBullet[] chargerThread;
     public boolean inGame = true;
@@ -26,7 +26,10 @@ public class Game_Panel extends JPanel {
 
     private ATD_Frame frame;
 
-    public int tank_hitted = 0;
+    public  int tank_hitted = 0;
+    public  int missed_shot = 0;
+    public  int used_charger = 0;
+    public  int used_bullet = 0;
 
 
 
@@ -165,13 +168,13 @@ public class Game_Panel extends JPanel {
 
                 firePressed = true;
 
-                if (colpi_sparati < colpi_caricatore ) {
+                if (shootted_bullet < charger_capacity) {
 
-                    chargerThread[colpi_sparati] = new threadBullet();
+                    chargerThread[shootted_bullet] = new threadBullet();
 
-                    chargerThread[colpi_sparati].start();
+                    chargerThread[shootted_bullet].start();
 
-                    System.out.println(colpi_sparati);
+                    System.out.println(shootted_bullet);
 
                 }
             }
@@ -227,41 +230,49 @@ public class Game_Panel extends JPanel {
 
             Thread ricaricaThread = new RicaricaThread();
 
-            if (colpi_sparati < colpi_caricatore ){
+            if (shootted_bullet < charger_capacity){
 
-                int colpo_attivo = colpi_sparati;
+                int active_shot = shootted_bullet;
 
-                colpi_sparati++;
+                shootted_bullet++;
 
-                System.out.println(colpi_sparati + ";" + colpo_attivo );
+                used_bullet++;
 
-                if (colpi_sparati >= colpi_caricatore){
+                System.out.println("Colpi utilizzati" + used_bullet);
+
+                System.out.println(shootted_bullet + ";" + active_shot );
+
+                if (shootted_bullet >= charger_capacity){
                     ricaricaThread.start();
                 }
 
-                charger[colpo_attivo] = new Shot(player.x, player.y, player.getWidth(), player.getHeight());
+                charger[active_shot] = new Shot(player.x, player.y, player.getWidth(), player.getHeight());
 
-                while(!charger[colpo_attivo].shotted(true) && (tank_hitted < frame.active_level.enemiesNumber) && !charger[colpo_attivo].hit) {
+                while(!charger[active_shot].shotted(true) && (tank_hitted < frame.active_level.enemiesNumber) && !charger[active_shot].hit) {
 
                     frame.game_panel.repaint();
 
                     int i = 0;
 
-                    while (i < frame.active_level.enemiesNumber && !charger[colpo_attivo].hit) {
+                    while (i < frame.active_level.enemiesNumber && !charger[active_shot].hit) {
 
-                        if (frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].isalive && enemy_hitted(frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i], charger[colpo_attivo])) {
+                        if (frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].isalive && enemy_hitted(frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i], charger[active_shot])) {
 
                             tank_hitted++;
 
+                            missed_shot --;
+
                             frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].isHitted(true);
 
-                            charger[colpo_attivo].shotHit();
+                            charger[active_shot].shotHit();
+
+
 
                             if (tank_hitted == frame.active_level.enemiesNumber) {
 
                                 tank_hitted = 0;
 
-                                for (int j = 0; j < colpi_caricatore; j++){
+                                for (int j = 0; j < charger_capacity; j++){
 
                                     charger[j].shotHit();
                                 }
@@ -270,14 +281,20 @@ public class Game_Panel extends JPanel {
 
                                 statusGamechange(false);
 
+                                player.levelUp();
+
                                 frame.active_level.nextLevel();
+
                             }
                         } else {
 
-                            System.out.println("nemico NON COLPITO");
+
+                            System.out.println("colpi mancati: " + missed_shot);
                         }
 
                         i++;
+
+
 
                     }
 
@@ -290,7 +307,12 @@ public class Game_Panel extends JPanel {
                         }
 
                     }
+
+                missed_shot ++;
+
             }
+
+
         }
     }
 
@@ -311,7 +333,11 @@ public class Game_Panel extends JPanel {
                 e.printStackTrace();
             }
 
-            colpi_sparati = 0;
+            shootted_bullet = 0;
+
+            used_charger++;
+
+            System.out.println("Caricatori usati: " + used_charger);
 
             //scritta ricarica
         }
@@ -345,7 +371,7 @@ public class Game_Panel extends JPanel {
 
         if (inGame){
 
-            player = new Player(player_level);
+            player = new Player();
 
             this.addKeyListener(new Keyboard_Input());
 
@@ -353,11 +379,11 @@ public class Game_Panel extends JPanel {
 
             this.game_panel_img = Resources.getImage("/Resources/First_Level_Background.png");
 
-            charger = new Shot[colpi_caricatore];
+            charger = new Shot[charger_capacity];
 
-            chargerThread = new threadBullet[colpi_caricatore];
+            chargerThread = new threadBullet[charger_capacity];
 
-            for (int i = 0; i < colpi_caricatore; i++){
+            for (int i = 0; i < charger_capacity; i++){
 
                 charger[i] = new Shot(800,800,0,0);
                 chargerThread[i] = new threadBullet();

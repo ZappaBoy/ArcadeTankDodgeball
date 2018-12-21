@@ -16,7 +16,7 @@ public class Enemy_Level3 extends Enemy {
         height = 80;
         level =3;
 
-        this.tank_img = Resources.getImage("/Resources/Enemy_Tank_Level3_img.png" );
+        this.tank_img = Resources.getImage("/Resources/Enemy_Tank_Level3_Blue_img.png" );
     }
 
     public Image getTank_img() {
