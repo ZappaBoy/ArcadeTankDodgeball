@@ -1,5 +1,7 @@
 package GUI;
 
+import GameLogic.Enemy_Shot;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -37,9 +39,11 @@ public class Active_Level extends JPanel {
 
         for (int i = 0; i < enemiesNumber; i++){
 
+
+            g.drawImage(levels[gameLevel - 1].enemies[i].tank_img, levels[gameLevel - 1].enemies[i].x, levels[gameLevel - 1].enemies[i].y, levels[gameLevel - 1].enemies[i].width, levels[gameLevel - 1].enemies[i].height, null );
+
             for (int j = 0; j < levels[gameLevel - 1].enemies[i].charger_capacity; j++){
 
-                g.drawImage(levels[gameLevel - 1].enemies[i].tank_img, levels[gameLevel - 1].enemies[i].x, levels[gameLevel - 1].enemies[i].y, levels[gameLevel - 1].enemies[i].width, levels[gameLevel - 1].enemies[i].height, null );
 
                 g.drawImage(levels[gameLevel - 1].enemies[i].enemyCharger[j].bullet_img, levels[gameLevel - 1].enemies[i].enemyCharger[j].x_shot, levels[gameLevel - 1].enemies[i].enemyCharger[j].y_shot, levels[gameLevel - 1].enemies[i].enemyCharger[j].width_shot, levels[gameLevel - 1].enemies[i].enemyCharger[j].height_shot, null );
 
@@ -100,7 +104,15 @@ public class Active_Level extends JPanel {
 
                 frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].threadEnemylogic.start();
 
+//                for (int j = 0; j < levels[activeLevel - 1].enemies[i].charger_capacity; j++){
+//
+//                   // levels[activeLevel - 1].enemies[i].enemyCharger[j] = new Enemy_Shot(0,0,0,0);
+//                }
+
+
             }
+
+
 
 
         }else{

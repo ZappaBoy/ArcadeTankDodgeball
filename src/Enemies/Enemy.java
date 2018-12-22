@@ -73,17 +73,29 @@ public class Enemy {
                 enemyCharger[i] = new Enemy_Shot(x , y, width, height);
             }
 
-            while (this.isAlive()) {
+//            Thread threadEnemyshot = new threadEnemyBullet();
+//
+//            threadEnemyshot.start();
 
 
+            while (isalive) {
 
                 movementLogic();
 
                 if (shootted_bullet < charger_capacity){
 
-                    enemyCharger[shootted_bullet].shotted(true);
+
+                   // enemyCharger[shootted_bullet].shotted(true);
+
+
+                    Thread threadEnemyshot = new threadEnemyBullet();
+
+                    threadEnemyshot.start();
 
                     shootted_bullet++;
+
+                    System.out.println(shootted_bullet);
+
                 }
 
                 try {
@@ -91,10 +103,14 @@ public class Enemy {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
+                }
+
+
             }
 
         }
-    }
+
 
 
     private void movementLogic() {
@@ -146,16 +162,22 @@ public class Enemy {
         }
     }
 
-    private class threadEnemyBullet extends Thread implements Runnable {
+    public class threadEnemyBullet extends Thread implements Runnable {
 
         @Override
         public void run() {
 
-            Enemy_Shot enemy_shot = new Enemy_Shot(x, y, width, height);
+           // enemyCharger = new Enemy_Shot[charger_capacity];
 
-            while (enemy_shot.shotted(true)){
+            enemyCharger[shootted_bullet] = new Enemy_Shot(x, y, width, height);
 
-                try {
+            while (enemyCharger[shootted_bullet].shotted(true)){
+
+
+                System.out.println(enemyCharger[shootted_bullet].x_shot);
+
+
+                    try {
                     Thread.sleep(50);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

@@ -71,6 +71,7 @@ public class ATD_Frame extends JFrame {
                 for (int i = 0; i < this.active_level.enemiesNumber; i++){
 
                     this.active_level.levels[active_level.activeLevel - 1].enemies[i].threadEnemylogic.start();
+
                 }
 
             }
