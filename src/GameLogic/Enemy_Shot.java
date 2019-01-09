@@ -38,7 +38,7 @@ public class Enemy_Shot {
 
             if (x_shot > 0) {
 
-                this.x_shot -= speed_movement;
+                x_shot -= speed_movement;
 
             } else {
                 end_shot = true;

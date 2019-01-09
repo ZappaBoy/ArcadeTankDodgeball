@@ -77,6 +77,7 @@ public class Start_Panel extends JPanel {
             if (start_button.contains(e.getPoint())) {
 
                frame.inGame(true);
+
             }
 
             if (credits_button.contains(e.getPoint())) {

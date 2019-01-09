@@ -65,28 +65,31 @@ public class ATD_Frame extends JFrame {
             inGame = true;
 
 
-            if (active_level.activeLevel == 1){
-
-
-                for (int i = 0; i < this.active_level.enemiesNumber; i++){
-
-                    this.active_level.levels[active_level.activeLevel - 1].enemies[i].threadEnemylogic.start();
-
-                }
+            //startare delay con il pannello di gioco
+            if (active_level.activeLevel == 1 && !game_panel.lose){
+                game_panel.thread_Delay.start();
 
             }
 
+            this.game_panel.playerisHitted = false;
+
+            active_level.enemiesLogicStart(inGame);
+
+            game_panel.statusGamechange(inGame);
+
             Thread threadGameRepaint = new repaintThread();
             threadGameRepaint.start();
-
-
 
         }else{
 
             this.start_panel.setVisible(true);
             this.game_panel.setVisible(false);
             this.active_level.setVisible(false);
+
             inGame = false;
+
+            active_level.enemiesLogicStart(inGame);
+
         }
     }
 

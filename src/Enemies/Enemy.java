@@ -1,10 +1,9 @@
 package Enemies;
 
-import GUI.Game_Panel;
 import GameLogic.Enemy_Shot;
-import GameLogic.Shot;
+import Player.Player;
+import javafx.print.PageLayout;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
@@ -32,9 +31,10 @@ public class Enemy {
     int right_collider = 710;
 
 
-    public int shootted_bullet = 0;
+    public int shotted_bullet = 0;
     public Enemy_Shot[] enemyCharger;
-    public int charger_capacity = 6;
+    public Thread[] threadEnemybullett;
+    public int charger_capacity = 3;
 
 
 
@@ -52,7 +52,12 @@ public class Enemy {
 
 //        threadEnemylogic.start();
 
-        System.out.println("start AI : " + level);
+
+    }
+
+    public void initEnemyLogic(){
+
+        threadEnemylogic = new threadEnemyAI();                                     //inizializzare di nuovo il thread della logica (vedi active level)
 
     }
 
@@ -65,15 +70,19 @@ public class Enemy {
         @Override
         public void run() {
 
+            System.out.println("start AI : " + level);
+
             enemyCharger = new Enemy_Shot[charger_capacity];
+            threadEnemybullett = new threadEnemyShot[charger_capacity];
 
 
             for (int i = 0; i < charger_capacity; i++){
 
                 enemyCharger[i] = new Enemy_Shot(x , y, width, height);
+                threadEnemybullett[i]= new threadEnemyShot();
             }
 
-//            Thread threadEnemyshot = new threadEnemyBullet();
+//            Thread threadEnemyshot = new threadEnemyShot();
 //
 //            threadEnemyshot.start();
 
@@ -82,34 +91,60 @@ public class Enemy {
 
                 movementLogic();
 
-                if (shootted_bullet < charger_capacity){
+                if (shotted_bullet < charger_capacity){
 
+                    //enemyCharger[shotted_bullet].shotted(true);
 
-                   // enemyCharger[shootted_bullet].shotted(true);
+                    System.out.println("bullet enem shotted" + shotted_bullet);
 
+                    //enemyCharger[shotted_bullet] = new Enemy_Shot(x, y, width, height);
 
-                    Thread threadEnemyshot = new threadEnemyBullet();
+                    threadEnemybullett[shotted_bullet] = new threadEnemyShot();
 
-                    threadEnemyshot.start();
+                    threadEnemybullett[shotted_bullet].start();
 
-                    shootted_bullet++;
-
-                    System.out.println(shootted_bullet);
-
+                    System.out.println("bullet enem shotted" + shotted_bullet);
                 }
 
                 try {
-                    Thread.sleep(200);
+                    Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
                 }
+            }
+        }
 
 
+        //PROBLEMA CON VELOCITA THREAD - SHOTTED_BULLETT VIENE INCREMENTATO PRIMA DELLA FINE DEL THREAD
+
+    public class threadEnemyShot extends Thread implements Runnable {
+
+        @Override
+        public void run() {
+
+            // enemyCharger = new Enemy_Shot[charger_capacity];
+
+            shotted_bullet++;
+
+            enemyCharger[shotted_bullet - 1] = new Enemy_Shot(x, y, width, height);
+
+            while (!enemyCharger[shotted_bullet - 1].shotted(true)){
+
+
+
+
+                try {
+                    Thread.sleep(20);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
 
+            System.out.println("end " + shotted_bullet);
         }
+    }
 
 
 
@@ -159,32 +194,6 @@ public class Enemy {
         if (direction == right && x < right_collider) {
 
             x += movement_speed;
-        }
-    }
-
-    public class threadEnemyBullet extends Thread implements Runnable {
-
-        @Override
-        public void run() {
-
-           // enemyCharger = new Enemy_Shot[charger_capacity];
-
-            enemyCharger[shootted_bullet] = new Enemy_Shot(x, y, width, height);
-
-            while (enemyCharger[shootted_bullet].shotted(true)){
-
-
-                System.out.println(enemyCharger[shootted_bullet].x_shot);
-
-
-                    try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-
-
         }
     }
 }
