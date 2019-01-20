@@ -11,8 +11,8 @@ public class Enemy {
 
     public int x = 0;
     public int y = 0;
-    public int height = 0;
-    public int width = 0;
+    public int height = 80;
+    public int width = 80;
     public boolean isalive = true;
     public int level = 0;
     public Image tank_img;
@@ -42,20 +42,19 @@ public class Enemy {
 
         if (isHitted) {
             isalive = false;
-            tank_img = null;
+            //tank_img = null;
             x = 800;
             y = 800;
-            height = 0;
-            width = 0;
+//            height = 0;
+//            width = 0;
+
         }
-
-
-//        threadEnemylogic.start();
-
-
     }
 
     public void initEnemyLogic(){
+
+        isalive = true;
+        shotted_bullet = 0;
 
         threadEnemylogic = new threadEnemyAI();                                     //inizializzare di nuovo il thread della logica (vedi active level)
 
@@ -70,7 +69,7 @@ public class Enemy {
         @Override
         public void run() {
 
-            System.out.println("start AI : " + level);
+            //System.out.println("start AI : " + level);
 
             enemyCharger = new Enemy_Shot[charger_capacity];
             threadEnemybullett = new threadEnemyShot[charger_capacity];
@@ -80,6 +79,8 @@ public class Enemy {
 
                 enemyCharger[i] = new Enemy_Shot(x , y, width, height);
                 threadEnemybullett[i]= new threadEnemyShot();
+
+               // enemyCharger[i].initEnemyShot();
             }
 
 //            Thread threadEnemyshot = new threadEnemyShot();
@@ -95,7 +96,7 @@ public class Enemy {
 
                     //enemyCharger[shotted_bullet].shotted(true);
 
-                    System.out.println("bullet enem shotted" + shotted_bullet);
+                    //System.out.println("bullet enem shotted" + shotted_bullet);
 
                     //enemyCharger[shotted_bullet] = new Enemy_Shot(x, y, width, height);
 
@@ -103,11 +104,26 @@ public class Enemy {
 
                     threadEnemybullett[shotted_bullet].start();
 
-                    System.out.println("bullet enem shotted" + shotted_bullet);
+                    //System.out.println("bullet enem shotted" + shotted_bullet);
+
+                } else{
+
+                   // System.out.println("Ricarica Caricatore nemico" );
+
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    //Ricarica Cricatore Nemico
+
+                    shotted_bullet = 0;
+
                 }
 
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -115,6 +131,8 @@ public class Enemy {
                 }
             }
         }
+
+
 
 
         //PROBLEMA CON VELOCITA THREAD - SHOTTED_BULLETT VIENE INCREMENTATO PRIMA DELLA FINE DEL THREAD
@@ -126,14 +144,13 @@ public class Enemy {
 
             // enemyCharger = new Enemy_Shot[charger_capacity];
 
+            //System.out.println(shotted_bullet);
+
             shotted_bullet++;
 
             enemyCharger[shotted_bullet - 1] = new Enemy_Shot(x, y, width, height);
 
             while (!enemyCharger[shotted_bullet - 1].shotted(true)){
-
-
-
 
                 try {
                     Thread.sleep(20);
@@ -142,7 +159,9 @@ public class Enemy {
                 }
             }
 
-            System.out.println("end " + shotted_bullet);
+            enemyCharger[shotted_bullet - 1].bullet_img = null;
+
+           // System.out.println("end " + shotted_bullet);
         }
     }
 

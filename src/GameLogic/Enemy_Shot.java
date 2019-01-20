@@ -26,6 +26,8 @@ public class Enemy_Shot {
 
     }
 
+
+
     public boolean shotted(boolean isShotted){
 
 

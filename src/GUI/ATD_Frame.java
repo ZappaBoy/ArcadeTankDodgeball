@@ -51,10 +51,10 @@ public class ATD_Frame extends JFrame {
 
     }
 
-    public void inGame(boolean ingame){
+    public void inGame(boolean isGaming){
 
 
-        if (ingame){
+        if (isGaming){
 
             this.start_panel.setVisible(false);
             this.game_panel.setVisible(true);
@@ -66,31 +66,38 @@ public class ATD_Frame extends JFrame {
 
 
             //startare delay con il pannello di gioco
-            if (active_level.activeLevel == 1 && !game_panel.lose){
-                game_panel.thread_Delay.start();
+//            if (active_level.activeLevel == 1 && !game_panel.lose){
 
-            }
 
-            this.game_panel.playerisHitted = false;
 
-            active_level.enemiesLogicStart(inGame);
+            //this.game_panel.playerisHitted = false;
+
+           // active_level.enemiesLogicStart(inGame);
 
             game_panel.statusGamechange(inGame);
+
 
             Thread threadGameRepaint = new repaintThread();
             threadGameRepaint.start();
 
+
+
         }else{
+
+            inGame = false;
 
             this.start_panel.setVisible(true);
             this.game_panel.setVisible(false);
             this.active_level.setVisible(false);
 
-            inGame = false;
+            //game_panel.statusGamechange(inGame);
 
-            active_level.enemiesLogicStart(inGame);
+
 
         }
+
+       // active_level.enemiesLogicStart(inGame);
+
     }
 
 
