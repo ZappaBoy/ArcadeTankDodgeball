@@ -52,10 +52,6 @@ public class Game_Panel extends JPanel {
     Game_Panel(ATD_Frame pframe) {
 
         frame = pframe;
-
-
-
-
     }
 
 

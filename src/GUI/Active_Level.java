@@ -1,9 +1,5 @@
 package GUI;
 
-import Enemies.Enemy;
-import GameLogic.Enemy_Shot;
-import Player.Player;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -46,15 +42,12 @@ public class Active_Level extends JPanel {
 
                 if (!frame.game_panel.lose){
 
-
                     if (!levels[gameLevel - 1].enemies[i].enemyCharger[j].hit){
 
                         g.drawImage(levels[gameLevel - 1].enemies[i].enemyCharger[j].bullet_img, levels[gameLevel - 1].enemies[i].enemyCharger[j].x_shot, levels[gameLevel - 1].enemies[i].enemyCharger[j].y_shot, levels[gameLevel - 1].enemies[i].enemyCharger[j].width_shot, levels[gameLevel - 1].enemies[i].enemyCharger[j].height_shot, null );
 
                     }
                 }
-
-
             }
         }
     }

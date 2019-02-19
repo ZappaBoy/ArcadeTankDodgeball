@@ -20,6 +20,7 @@ public class Shot extends Rectangle {
     private int x_frame = 800;
     private int y_frame = 800;
     public boolean hit = false;
+    public boolean neverShotted = true;
 
     public Shot(Player player) {
 
@@ -33,7 +34,13 @@ public class Shot extends Rectangle {
 
     public boolean shotted(boolean isShotted){
 
-        bullet_img = Resources.getImage("/Resources/bullet_img.png");
+        if (neverShotted){
+
+            bullet_img = Resources.getImage("/Resources/bullet_img.png");
+
+            neverShotted = false;
+        }
+
 
         boolean end_shot;
          end_shot = false;

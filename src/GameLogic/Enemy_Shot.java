@@ -15,28 +15,22 @@ public class Enemy_Shot {
     public int width_shot = 30;
     public int height_shot = 30;
     public int speed_movement = 15;
-    private int x = 800;
-    private int y = 800;
     private boolean neverShotted = true;
     public boolean hit = false;
 
 
     public Enemy_Shot(int xTank, int yTank, int width, int height){
 
-        bullet_img = Resources.getImage("/Resources/bullet_img.png");
-
-        x = xTank - (width/2);
-        y = yTank + (height/3);
-
-
+        x_shot = xTank - (width/2);
+        y_shot = yTank + (height/3);
     }
 
 
     public boolean shotted(){
 
         if (neverShotted){
-            x_shot = x;
-            y_shot = y;
+
+            bullet_img = Resources.getImage("/Resources/bullet_img.png");
 
             neverShotted = false;
         }
