@@ -81,6 +81,8 @@ public class Game_Panel extends JPanel {
 
         frame.active_level.paintComponents(g);
 
+
+
         onDraw();
 
     }
@@ -278,8 +280,8 @@ public class Game_Panel extends JPanel {
 
                 if (inGame){
 
-                    System.out.println("SB" + shotted_bullet + "; AS" + active_shot );
-                    System.out.println("TH" + enemy_tank_hitted );
+                   // System.out.println("SB" + shotted_bullet + "; AS" + active_shot );
+                    //System.out.println("TH" + enemy_tank_hitted );
                     //System.out.println( );
 
 
@@ -311,13 +313,12 @@ public class Game_Panel extends JPanel {
 
                             if (enemy_tank_hitted == frame.active_level.enemiesNumber) {
 
-                                enemy_tank_hitted = 0;
+                                //enemy_tank_hitted = 0;
 
-                                for (int j = 0; j < charger_capacity; j++){
-
-                                    charger[j].shotHit();
-                                }
-
+//                                for (int j = 0; j < charger_capacity; j++){
+//
+//                                    charger[j].shotHit();
+//                                }
 
                                 player.levelUp();
 
@@ -325,7 +326,7 @@ public class Game_Panel extends JPanel {
 
                                 System.out.println("NextLVL");
 
-                                //inGame = false;
+                                inGame = false;
 
                                 statusGamechange(false);
 
@@ -336,11 +337,11 @@ public class Game_Panel extends JPanel {
                             }
                         } else {
 
-
+                            i++;
                            // System.out.println("colpi mancati: " + missed_shot);
                         }
 
-                        i++;
+
                     }
 
                     try {
@@ -354,7 +355,7 @@ public class Game_Panel extends JPanel {
 
                 missed_shot ++;
 
-                System.out.println("END PLAYER BULLETT THREAD");
+              //  System.out.println("END PLAYER BULLETT THREAD");
 
             }
         }
@@ -434,7 +435,7 @@ public class Game_Panel extends JPanel {
     }
 
 
-    private void restoreEnemyTank() {
+    private void restoreLevel() {
 
         for (int i = 0; i < frame.active_level.levels[frame.active_level.activeLevel - 1].enemies_number; i++) {
 
@@ -458,7 +459,7 @@ public class Game_Panel extends JPanel {
 
             while (inGame) {
 
-                System.out.println("ThreadPlayerHitted");
+                //System.out.println("ThreadPlayerHitted");
 
                     for (int i = 0; i < frame.active_level.levels[frame.active_level.activeLevel - 1].enemies_number; i++) {
 
@@ -470,19 +471,21 @@ public class Game_Panel extends JPanel {
 
                             if (!playerisHitted) {
 
+                                //System.out.println("Enemies: " + i + " EnemyCharger: " + j  + "Hit: " + frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].hit );
+
                                 if (!frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].hit) {
 
                                     if ((frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].x_shot >= player.x && frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].x_shot <= player.x + player.getWidth()) && (frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].y_shot >= player.y && frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].y_shot <= player.y + player.getHeight())) {
 
-                                        System.out.println("PlayerHitted");
+                                        //System.out.println("PlayerHitted");
 
-                                        restoreEnemyTank();
+                                        frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].hit = true;
 
                                         playerisHitted = true;
 
                                         lose = true;
 
-                                        //inGame = false;
+                                        inGame = false;
 
                                         statusGamechange(false);
 
@@ -497,11 +500,10 @@ public class Game_Panel extends JPanel {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
-
-                System.out.println("End PlayerHittedThread___________");
-
             }
+
+           // System.out.println("End PlayerHittedThread___________");
+
         }
     }
     /**
@@ -561,19 +563,16 @@ public class Game_Panel extends JPanel {
 
             inGame = false;
 
-
-
-            frame.active_level.enemiesLogicStart(inGame);
-
-
-
             this.frame.inGame(false);
 
-
             if (lose){
+                restoreLevel();
+
                 JOptionPane.showMessageDialog(frame, "You lose, try again!");
 
             }
+            frame.active_level.enemiesLogicStart(inGame);
+
 
             System.out.println("Status ingame false");
 

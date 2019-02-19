@@ -2,7 +2,7 @@ package Enemies;
 
 import GameLogic.Enemy_Shot;
 import Player.Player;
-import javafx.print.PageLayout;
+
 
 import java.awt.*;
 import java.util.Random;
@@ -56,6 +56,16 @@ public class Enemy {
         isalive = true;
         shotted_bullet = 0;
 
+        enemyCharger = new Enemy_Shot[charger_capacity];
+        threadEnemybullett = new threadEnemyShot[charger_capacity];
+
+
+        for (int i = 0; i < charger_capacity; i++){
+
+            enemyCharger[i] = new Enemy_Shot(x , y, width, height);
+            threadEnemybullett[i]= new threadEnemyShot();
+        }
+
         threadEnemylogic = new threadEnemyAI();                                     //inizializzare di nuovo il thread della logica (vedi active level)
 
     }
@@ -68,25 +78,6 @@ public class Enemy {
 
         @Override
         public void run() {
-
-            //System.out.println("start AI : " + level);
-
-            enemyCharger = new Enemy_Shot[charger_capacity];
-            threadEnemybullett = new threadEnemyShot[charger_capacity];
-
-
-            for (int i = 0; i < charger_capacity; i++){
-
-                enemyCharger[i] = new Enemy_Shot(x , y, width, height);
-                threadEnemybullett[i]= new threadEnemyShot();
-
-               // enemyCharger[i].initEnemyShot();
-            }
-
-//            Thread threadEnemyshot = new threadEnemyShot();
-//
-//            threadEnemyshot.start();
-
 
             while (isalive) {
 
@@ -150,7 +141,7 @@ public class Enemy {
 
             enemyCharger[shotted_bullet - 1] = new Enemy_Shot(x, y, width, height);
 
-            while (!enemyCharger[shotted_bullet - 1].shotted(true)){
+            while (!enemyCharger[shotted_bullet - 1].shotted() && !enemyCharger[shotted_bullet - 1].hit ){
 
                 try {
                     Thread.sleep(20);

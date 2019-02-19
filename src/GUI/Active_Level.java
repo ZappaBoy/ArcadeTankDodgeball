@@ -34,7 +34,7 @@ public class Active_Level extends JPanel {
     }
 
 
-    public void paintComponents(Graphics g) {
+    public void paintComponents(Graphics g){
 
 
         for (int i = 0; i < enemiesNumber; i++){
@@ -44,11 +44,16 @@ public class Active_Level extends JPanel {
 
             for (int j = 0; j < levels[activeLevel - 1].enemies[i].charger_capacity; j++){
 
-                if (frame.game_panel.inGame){
+                if (!frame.game_panel.lose){
 
-                    g.drawImage(levels[gameLevel - 1].enemies[i].enemyCharger[j].bullet_img, levels[gameLevel - 1].enemies[i].enemyCharger[j].x_shot, levels[gameLevel - 1].enemies[i].enemyCharger[j].y_shot, levels[gameLevel - 1].enemies[i].enemyCharger[j].width_shot, levels[gameLevel - 1].enemies[i].enemyCharger[j].height_shot, null );
 
+                    if (!levels[gameLevel - 1].enemies[i].enemyCharger[j].hit){
+
+                        g.drawImage(levels[gameLevel - 1].enemies[i].enemyCharger[j].bullet_img, levels[gameLevel - 1].enemies[i].enemyCharger[j].x_shot, levels[gameLevel - 1].enemies[i].enemyCharger[j].y_shot, levels[gameLevel - 1].enemies[i].enemyCharger[j].width_shot, levels[gameLevel - 1].enemies[i].enemyCharger[j].height_shot, null );
+
+                    }
                 }
+
 
             }
         }
