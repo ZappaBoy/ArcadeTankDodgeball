@@ -79,24 +79,24 @@ public class Game_Panel extends JPanel {
 
 
 
-        onDraw();
+        //onDraw();
 
     }
 
 
-    /**
-     * Buffered Strategy
-     */
-    private void onDraw() {
-        BufferStrategy frameStrategy = frame.getBufferStrategy();
-        if (frameStrategy == null) {
-
-            frame.createBufferStrategy(1);
-            frameStrategy = frame.getBufferStrategy();
-        }
-
-        frameStrategy.show();
-    }
+//    /**
+//     * Buffered Strategy
+//     */
+//    private void onDraw() {
+//        BufferStrategy frameStrategy = frame.getBufferStrategy();
+//        if (frameStrategy == null) {
+//
+//            frame.createBufferStrategy(1);
+//            frameStrategy = frame.getBufferStrategy();
+//        }
+//
+//        frameStrategy.show();
+//    }
 
     /**
      * Comandi Tastiera
@@ -184,7 +184,7 @@ public class Game_Panel extends JPanel {
 
                     firstShot = false;
 
-                    System.out.println("FIRSTSHOT");
+                   // System.out.println("FIRSTSHOT");
 
                 }
 
@@ -198,7 +198,7 @@ public class Game_Panel extends JPanel {
 
                         chargerThread[shotted_bullet].start();
 
-                        System.out.println("ThreadPlayerBulletStart");
+                       // System.out.println("ThreadPlayerBulletStart");
 
 
                         // System.out.println(shotted_bullet);
@@ -320,7 +320,7 @@ public class Game_Panel extends JPanel {
 
                                 frame.active_level.nextLevel();
 
-                                System.out.println("NextLVL");
+                               // System.out.println("NextLVL");
 
                                 inGame = false;
 
@@ -341,7 +341,7 @@ public class Game_Panel extends JPanel {
                     }
 
                     try {
-                            Thread.sleep(50);
+                            Thread.sleep(40);
 
                         } catch (InterruptedException e) {
                             e.printStackTrace();

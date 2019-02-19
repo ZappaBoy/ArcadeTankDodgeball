@@ -35,6 +35,7 @@ public class Enemy {
     public Enemy_Shot[] enemyCharger;
     public Thread[] threadEnemybullett;
     public int charger_capacity = 3;
+    private boolean firstShot = true;
 
 
 
@@ -83,26 +84,32 @@ public class Enemy {
 
                 movementLogic();
 
+                if (firstShot){
+
+                    try {
+                        Thread.sleep(1500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    firstShot = false;
+
+                    movementLogic();
+                }
+
                 if (shotted_bullet < charger_capacity){
-
-                    //enemyCharger[shotted_bullet].shotted(true);
-
-                    //System.out.println("bullet enem shotted" + shotted_bullet);
-
-                    //enemyCharger[shotted_bullet] = new Enemy_Shot(x, y, width, height);
 
                     threadEnemybullett[shotted_bullet] = new threadEnemyShot();
 
                     threadEnemybullett[shotted_bullet].start();
 
-                    //System.out.println("bullet enem shotted" + shotted_bullet);
 
                 } else{
 
                    // System.out.println("Ricarica Caricatore nemico" );
 
                     try {
-                        Thread.sleep(500);
+                        Thread.sleep(300);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -113,8 +120,10 @@ public class Enemy {
 
                 }
 
+                movementLogic();
+
                 try {
-                    Thread.sleep(2500);
+                    Thread.sleep(1500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
