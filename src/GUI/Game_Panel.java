@@ -6,6 +6,7 @@ import java.awt.event.*;
 import java.awt.image.BufferStrategy;
 
 import Enemies.Enemy;
+import GameLogic.Enemy_Shot;
 import GameLogic.Shot;
 import Player.Player;
 import Utility.Resources;
@@ -41,6 +42,7 @@ public class Game_Panel extends JPanel {
     public Thread thread_PlayerHitted = new player_hitted();
 
     public boolean lose = false;
+    public boolean win = false;
 
 
 
@@ -316,9 +318,11 @@ public class Game_Panel extends JPanel {
 //                                    charger[j].shotHit();
 //                                }
 
-                                player.levelUp();
+//                                player.levelUp();
+//
+//                                frame.active_level.nextLevel();
 
-                                frame.active_level.nextLevel();
+                                win = true;
 
                                // System.out.println("NextLVL");
 
@@ -422,7 +426,24 @@ public class Game_Panel extends JPanel {
 
         boolean isHitted = false;
 
-        if ((shot.x_shot >= enemy.x && shot.x_shot <= enemy.x + enemy.width) && (shot.y_shot >= enemy.y && shot.y_shot <= enemy.y + enemy.height)){
+        if ((shot.x_shot >= enemy.x && shot.x_shot <= enemy.x + enemy.width) && (shot.y_shot >= enemy.y && shot.y_shot <= enemy.y + enemy.height - 20)){
+
+            isHitted = true;
+        }
+
+        return isHitted;
+    }
+
+
+    /**
+     *     Metodo player colpito
+     */
+
+    public boolean playerHit(Player player, Enemy_Shot enemy_shot) {
+
+        boolean isHitted = false;
+
+        if ((enemy_shot.x_shot >= player.x && enemy_shot.x_shot <= player.x + player.getWidth()) && (enemy_shot.y_shot >= player.y && enemy_shot.y_shot <= player.y + player.getHeight() - 20)){
 
             isHitted = true;
         }
@@ -471,8 +492,9 @@ public class Game_Panel extends JPanel {
 
                                 if (!frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].hit) {
 
-                                    if ((frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].x_shot >= player.x && frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].x_shot <= player.x + player.getWidth()) && (frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].y_shot >= player.y && frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].y_shot <= player.y + player.getHeight())) {
+                                   // if ((frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].x_shot >= player.x && frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].x_shot <= player.x + player.getWidth()) && (frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].y_shot >= player.y && frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].y_shot <= player.y + player.getHeight())) {
 
+                                    if (playerHit(player, frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j])){
                                         //System.out.println("PlayerHitted");
 
                                         frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].hit = true;
@@ -522,6 +544,8 @@ public class Game_Panel extends JPanel {
 
             lose = false;
 
+            win = false;
+
             if (frame.active_level.activeLevel == 1 && !playerisHitted){
 
                 player = new Player();
@@ -553,7 +577,7 @@ public class Game_Panel extends JPanel {
 
             thread_Delay = new threadDelay();
 
-            System.out.println("Status ingame true");
+            //System.out.println("Status ingame true");
 
         }else {
 
@@ -566,14 +590,16 @@ public class Game_Panel extends JPanel {
 
                 JOptionPane.showMessageDialog(frame, "You lose, try again!");
 
+            } else if(win){
+
+                player.levelUp();
+
+                frame.active_level.nextLevel();
             }
             frame.active_level.enemiesLogicStart(inGame);
 
 
-            System.out.println("Status ingame false");
-
-
-
+            //System.out.println("Status ingame false");
         }
 
 

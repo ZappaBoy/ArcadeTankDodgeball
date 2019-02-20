@@ -36,7 +36,7 @@ public class Shot extends Rectangle {
 
         if (neverShotted){
 
-            bullet_img = Resources.getImage("/Resources/bullet_img.png");
+            bullet_img = Resources.getImage("/Resources/Bullet_Img_Player.png");
 
             neverShotted = false;
         }

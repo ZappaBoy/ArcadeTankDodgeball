@@ -19,14 +19,10 @@ public class Enemy_Level1 extends Enemy{
         height = 80;
         level = 1;
 
-
-
         up_collider = 3 + 260;
         down_collider = 700 - 260;
 
         this.tank_img = Resources.getImage("/Resources/Enemy_Tank_Level1_Red_img.png" );
-
-
 
     }
 

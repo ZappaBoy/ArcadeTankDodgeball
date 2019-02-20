@@ -30,7 +30,7 @@ public class Enemy_Shot {
 
         if (neverShotted){
 
-            bullet_img = Resources.getImage("/Resources/bullet_img.png");
+            bullet_img = Resources.getImage("/Resources/Bullet_Img_Enemy.png");
 
             neverShotted = false;
         }

@@ -27,7 +27,7 @@ public class Credits_Panel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
 
-        g.drawImage(credits_panel_img, 100, 100, 600, 80, null);
+        g.drawImage(credits_panel_img, 0, 0, 800, 800, null);
         //cambiare immagine
     }
 }
