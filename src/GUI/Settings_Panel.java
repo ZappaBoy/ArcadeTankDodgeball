@@ -126,6 +126,8 @@ public class Settings_Panel extends JPanel {
                     color = orange;
                     boundary_rect.x = color_button_orange.x;
                     boundary_rect.y = color_button_orange.y;
+                    boundary_rect.x -= 10;
+                    boundary_rect.y -= 10;
                 }
 
                 if (color_button_pink.contains(e.getPoint())) {
@@ -133,6 +135,8 @@ public class Settings_Panel extends JPanel {
                     color = pink;
                     boundary_rect.x = color_button_pink.x;
                     boundary_rect.y = color_button_pink.y;
+                    boundary_rect.x -= 10;
+                    boundary_rect.y -= 10;
                 }
 
                 if (color_button_yellow.contains(e.getPoint())) {
@@ -140,10 +144,9 @@ public class Settings_Panel extends JPanel {
                     color = yellow;
                     boundary_rect.x = color_button_yellow.x;
                     boundary_rect.y = color_button_yellow.y;
+                    boundary_rect.x -= 10;
+                    boundary_rect.y -= 10;
                 }
-
-                boundary_rect.x -= 10;
-                boundary_rect.y -= 10;
             }
 
             repaint();
