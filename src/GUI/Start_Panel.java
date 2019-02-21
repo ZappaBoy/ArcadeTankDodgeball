@@ -25,6 +25,9 @@ public class Start_Panel extends JPanel {
     //Pulsante Exit
     private HotArea exit_button = new HotArea();
 
+    //Pulsante Settings
+    private HotArea settings_button = new HotArea();
+
     private ATD_Frame frame;
 
     Start_Panel(ATD_Frame pframe){
@@ -53,6 +56,13 @@ public class Start_Panel extends JPanel {
         this.exit_button.width = 250; //Lunghezza
         this.exit_button.height = 70; //Altezza
 
+        //Pulsante Settings
+        this.settings_button.x = 690; //Asse x
+        this.settings_button.y = 540; //Asse y
+        this.settings_button.width = 80; //Lunghezza
+        this.settings_button.height = 90; //Altezza
+
+
         this.addMouseListener(new MyMouseListener());
 
         this.start_panel_img = Resources.getImage("/Resources/Start_Panel.png");
@@ -63,6 +73,8 @@ public class Start_Panel extends JPanel {
 
         g.setColor(Color.BLACK);
         g.drawImage(start_panel_img, 0, 0, 800, 800, null );
+       // g.drawRect(settings_button.x, settings_button.y, settings_button.width, settings_button.height);
+
     }
 
 
@@ -90,6 +102,13 @@ public class Start_Panel extends JPanel {
             if (exit_button.contains(e.getPoint())) {
 
                 System.exit(0);
+
+            }
+
+            if (settings_button.contains(e.getPoint())) {
+
+                frame.start_panel.setVisible(false);
+                frame.settings_panel.setVisible(true);
 
             }
         }

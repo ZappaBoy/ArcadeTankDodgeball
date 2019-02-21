@@ -35,7 +35,6 @@ public class Active_Level extends JPanel {
 
         for (int i = 0; i < enemiesNumber; i++){
 
-
             g.drawImage(levels[gameLevel - 1].enemies[i].tank_img, levels[gameLevel - 1].enemies[i].x, levels[gameLevel - 1].enemies[i].y, levels[gameLevel - 1].enemies[i].width, levels[gameLevel - 1].enemies[i].height, null );
 
             for (int j = 0; j < levels[activeLevel - 1].enemies[i].charger_capacity; j++){

@@ -1,6 +1,9 @@
 package GUI;
 
 import Enemies.Enemy;
+import Utility.Resources;
+
+import java.awt.*;
 
 public class Level {
 
@@ -13,12 +16,21 @@ public class Level {
 
     public Enemy[] enemies;
 
+    private Image level_image;
+
 
     public int getEnemies_number() {
 
         enemies_number = enemyLevel1_number + enemyLevel2_number + enemyLevel3_number;
 
         return enemies_number;
+    }
+
+    public Image getlevel_img() {
+
+        level_image =  Resources.getImage("/Resources/Level_" + gameLevel + "_Background.png");
+
+        return level_image;
     }
 }
 

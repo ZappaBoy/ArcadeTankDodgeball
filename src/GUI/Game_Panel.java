@@ -552,13 +552,18 @@ public class Game_Panel extends JPanel {
 
                 this.addKeyListener(new Keyboard_Input());
                 this.setSize(800, 800);
-                this.game_panel_img = Resources.getImage("/Resources/First_Level_Background.png");
+                //this.game_panel_img = Resources.getImage("/Resources/First_Level_Background.png");
 
                 charger = new Shot[charger_capacity];
 
                 chargerThread = new threadPlayerBullet[charger_capacity];
 
             }
+
+            this.game_panel_img = frame.active_level.levels[frame.active_level.activeLevel - 1].getlevel_img();
+
+            player.color = frame.settings_panel.color;
+            player.playerImageinit();
 
             playerisHitted = false;
 
@@ -586,6 +591,7 @@ public class Game_Panel extends JPanel {
             this.frame.inGame(false);
 
             if (lose){
+
                 restoreLevel();
 
                 JOptionPane.showMessageDialog(frame, "You lose, try again!");

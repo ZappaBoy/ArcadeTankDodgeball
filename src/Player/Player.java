@@ -81,7 +81,7 @@ public class Player {
 
      if (color == 1){
 
-         colore = "_Green";
+         colore = "_Orange";
          this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
 
      }
@@ -89,7 +89,7 @@ public class Player {
 
      if (color == 2){
 
-            colore = "_Red";
+            colore = "_Pink";
          this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
 
      }
@@ -97,7 +97,7 @@ public class Player {
 
      if (color == 3){
 
-            colore = "_Blue";
+            colore = "_Yellow";
          this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
 
      }
