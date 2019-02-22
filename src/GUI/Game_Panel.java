@@ -461,6 +461,38 @@ public class Game_Panel extends JPanel {
         }
     }
 
+
+
+    private class changeFinalImage extends Thread implements Runnable {
+
+        @Override
+        public void run() {
+            boolean change = true;
+
+            while (frame.active_level.gameLevel == frame.active_level.levels_numbers && inGame) {
+
+                if (change) {
+
+                    frame.game_panel.game_panel_img = Resources.getImage("/Resources/Level_" + 4 + "_Background_" + 0 + ".png");
+
+                } else {
+
+                    frame.game_panel.game_panel_img = Resources.getImage("/Resources/Level_" + 4 + "_Background_" + 1 + ".png");
+
+                }
+
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                change = !change;
+
+            }
+        }
+    }
+
     /**
      *     Metodo Player colpito
      */
@@ -557,7 +589,17 @@ public class Game_Panel extends JPanel {
 
             }
 
-            this.game_panel_img = frame.active_level.levels[frame.active_level.activeLevel - 1].getlevel_img();
+            if (frame.active_level.gameLevel < frame.active_level.levels_numbers){
+
+                this.game_panel_img = frame.active_level.levels[frame.active_level.activeLevel - 1].getlevel_img();
+
+            } else {
+
+                Thread changeFinalImageThread = new changeFinalImage();
+
+                changeFinalImageThread.start();
+            }
+
 
             player.color = frame.settings_panel.color;
 
@@ -580,6 +622,7 @@ public class Game_Panel extends JPanel {
 
             thread_Delay = new threadDelay();
 
+
             //System.out.println("Status ingame true");
 
         }else {
@@ -598,7 +641,11 @@ public class Game_Panel extends JPanel {
 
             } else if(win){
 
-                player.levelUp();
+                if (player.level <3){
+
+                    player.levelUp();
+
+                }
 
                 frame.active_level.nextLevel();
             }

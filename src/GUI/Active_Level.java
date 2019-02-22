@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class Active_Level extends JPanel {
 
-    private int gameLevel = 1;
+    public int gameLevel = 1;
 
     public int enemiesNumber = 1;
 
@@ -13,7 +13,7 @@ public class Active_Level extends JPanel {
 
     public Level[] levels;
 
-    public int levels_numbers = 3;
+    public int levels_numbers = 4;
 
     public int activeLevel = 1; //active level deve esere = 0
 
@@ -27,10 +27,12 @@ public class Active_Level extends JPanel {
         levels[0] = new Level_1();
         levels[1] = new Level_2();
         levels[2] = new Level_3();
+        levels[3] = new Level_Final();
     }
 
 
     public void paintComponents(Graphics g){
+
 
 
         for (int i = 0; i < enemiesNumber; i++){
