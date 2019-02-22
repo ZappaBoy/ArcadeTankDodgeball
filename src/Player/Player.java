@@ -15,6 +15,8 @@ public class Player {
     public int y = 360;
     public int level = 1;
     public int color = 1;
+    public int maxLevel = 3;
+
 
     private final int height = 80;
     private final int width = 80;

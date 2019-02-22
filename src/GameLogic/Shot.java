@@ -27,6 +27,9 @@ public class Shot extends Rectangle {
         x_shot = player.x + (player.getWidth()/2);
         y_shot = player.y + (player.getHeight()/3);
 
+        width_shot = player.getWidth()/5*2;
+        width_shot = player.getHeight()/5*2;
+
 
     }
 

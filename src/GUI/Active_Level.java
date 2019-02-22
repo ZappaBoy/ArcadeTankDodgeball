@@ -34,6 +34,11 @@ public class Active_Level extends JPanel {
     public void paintComponents(Graphics g){
 
 
+        System.out.println("gameLevel: " + gameLevel);
+
+        System.out.println("enemiesNumber: " + enemiesNumber);
+
+
 
         for (int i = 0; i < enemiesNumber; i++){
 

@@ -3,7 +3,6 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferStrategy;
 
 import Enemies.Enemy;
 import GameLogic.Enemy_Shot;
@@ -141,6 +140,15 @@ public class Game_Panel extends JPanel {
             }
 
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+
+
+//                win = true;
+//
+//                inGame = false;
+//
+//                statusGamechange(false);
+
+
 
                 rightPressed = true;
 
@@ -295,23 +303,34 @@ public class Game_Panel extends JPanel {
 
                     while (i < frame.active_level.enemiesNumber && !charger[active_shot].hit ) {
 
-                        if (frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].isalive && enemy_hitted(frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i], charger[active_shot])) {
+                        if (frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].isalive && enemyHit(frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i], charger[active_shot])) {
 
-                            enemy_tank_hitted++;
+//                            enemy_tank_hitted++;
 
                            // System.out.println("ENEMYTANKHitted   "  + enemy_tank_hitted);
 
                             missed_shot --;
 
-                            frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].isHitted(true);
-
                             charger[active_shot].shotHit();
 
-                            //System.out.println(enemy_tank_hitted);
+                            if (frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].life >= 0){
 
-                            if (enemy_tank_hitted == frame.active_level.enemiesNumber) {
+                                frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].isHitted(true);
 
-                                //enemy_tank_hitted = 0;
+
+
+                            }
+
+                            if (frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].life == 0){
+
+                                enemy_tank_hitted++;
+
+                            }
+
+
+                                if (enemy_tank_hitted == frame.active_level.enemiesNumber  ) {
+
+                                    //enemy_tank_hitted = 0;
 
 //                                for (int j = 0; j < charger_capacity; j++){
 //
@@ -322,24 +341,24 @@ public class Game_Panel extends JPanel {
 //
 //                                frame.active_level.nextLevel();
 
-                                win = true;
+                                    win = true;
 
-                               // System.out.println("NextLVL");
+                                    // System.out.println("NextLVL");
 
-                                inGame = false;
+                                    inGame = false;
 
-                                statusGamechange(false);
+                                    statusGamechange(false);
 
-                                JOptionPane.showMessageDialog(frame, "You hit all enemy tanks!");
+                                    JOptionPane.showMessageDialog(frame, "You hit all enemy tanks!");
 
+                                }
 
-
-                            }
                         } else {
 
                             i++;
                            // System.out.println("colpi mancati: " + missed_shot);
                         }
+
 
 
                     }
@@ -367,7 +386,7 @@ public class Game_Panel extends JPanel {
     /**
      *     Thread ricarica colpi caricatore
      */
-    public class RicaricaThread extends Thread implements Runnable{
+    public class RicaricaThread extends Thread implements Runnable{   //TODO: Scritta ricarica
 
         @Override
         public void run() {
@@ -420,11 +439,11 @@ public class Game_Panel extends JPanel {
      *     Metodo nemico colpito
      */
 
-    public boolean enemy_hitted(Enemy enemy, Shot shot) {
+    public boolean enemyHit(Enemy enemy, Shot shot) {
 
         boolean isHitted = false;
 
-        if ((shot.x_shot >= enemy.x && shot.x_shot <= enemy.x + enemy.width) && (shot.y_shot >= enemy.y && shot.y_shot <= enemy.y + enemy.height - 20)){
+        if ((shot.x_shot + shot.width_shot/2  >= enemy.x && shot.x_shot <= enemy.x + enemy.width) && (shot.y_shot + shot.height_shot/2 >= enemy.y && shot.y_shot <= enemy.y + enemy.height - 25 )){
 
             isHitted = true;
         }
@@ -441,7 +460,7 @@ public class Game_Panel extends JPanel {
 
         boolean isHitted = false;
 
-        if ((enemy_shot.x_shot >= player.x && enemy_shot.x_shot <= player.x + player.getWidth()) && (enemy_shot.y_shot >= player.y && enemy_shot.y_shot <= player.y + player.getHeight() - 20)){
+        if ((enemy_shot.x_shot >= player.x && enemy_shot.x_shot <= player.x + player.getWidth()) && (enemy_shot.y_shot + enemy_shot.height_shot/2 >= player.y && enemy_shot.y_shot <= player.y + player.getHeight() - 25 )){
 
             isHitted = true;
         }
@@ -482,7 +501,7 @@ public class Game_Panel extends JPanel {
                 }
 
                 try {
-                    Thread.sleep(300);
+                    Thread.sleep(200);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -641,7 +660,7 @@ public class Game_Panel extends JPanel {
 
             } else if(win){
 
-                if (player.level <3){
+                if (player.level < player.maxLevel){
 
                     player.levelUp();
 

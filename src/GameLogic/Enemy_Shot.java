@@ -23,6 +23,10 @@ public class Enemy_Shot {
 
         x_shot = xTank - (width/2);
         y_shot = yTank + (height/3);
+
+        width_shot = width /5*2;
+        height_shot = height/5*2;
+
     }
 
 

@@ -13,6 +13,7 @@ public class Level {
     public int enemyLevel1_number = 0;
     public int enemyLevel2_number = 0;
     public int enemyLevel3_number = 0;
+    public int finalBoss_number = 0;
 
     public Enemy[] enemies;
 
@@ -21,7 +22,7 @@ public class Level {
 
     public int getEnemies_number() {
 
-        enemies_number = enemyLevel1_number + enemyLevel2_number + enemyLevel3_number;
+        enemies_number = enemyLevel1_number + enemyLevel2_number + enemyLevel3_number + finalBoss_number;
 
         return enemies_number;
     }
