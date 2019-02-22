@@ -17,7 +17,7 @@ public class Enemy_Level3 extends Enemy {
         level =3;
 
         up_collider = 3 + 260 + 260;
-        down_collider = 700 ;
+        down_collider = 680 ;
 
 
         this.tank_img = Resources.getImage("/Resources/Enemy_Tank_Level3_Green_img.png" );

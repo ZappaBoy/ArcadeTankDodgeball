@@ -82,7 +82,7 @@ public class Player {
      if (color == 1){
 
          colore = "_Orange";
-         this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
+       //  this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
 
      }
 
@@ -90,7 +90,7 @@ public class Player {
      if (color == 2){
 
             colore = "_Pink";
-         this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
+      //   this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
 
      }
 
@@ -98,11 +98,36 @@ public class Player {
      if (color == 3){
 
             colore = "_Yellow";
-         this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
+       //  this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
 
      }
 
-     return colore;
+      if (color == 4){
+
+            colore = "_Green";
+           // this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
+
+      }
+
+
+      if (color == 5){
+
+            colore = "_Red";
+          //  this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
+
+      }
+
+
+      if (color == 6){
+
+            colore = "_Blue";
+
+      }
+
+        this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
+
+
+        return colore;
 
     }
 

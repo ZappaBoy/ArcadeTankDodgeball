@@ -67,8 +67,7 @@ public class Enemy {
             threadEnemybullett[i]= new threadEnemyShot();
         }
 
-        threadEnemylogic = new threadEnemyAI();                                     //inizializzare di nuovo il thread della logica (vedi active level)
-
+        threadEnemylogic = new threadEnemyAI();
     }
 
 

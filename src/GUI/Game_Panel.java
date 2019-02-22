@@ -409,8 +409,6 @@ public class Game_Panel extends JPanel {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-
                 //System.out.println("delay: " + readyToshot);
             }
 
@@ -506,13 +504,12 @@ public class Game_Panel extends JPanel {
                                         inGame = false;
 
                                         statusGamechange(false);
-
                                     }
                                 }
                             }
                         }
-
                     }
+
                     try {
                         Thread.sleep(20);
                     } catch (InterruptedException e) {
@@ -563,6 +560,7 @@ public class Game_Panel extends JPanel {
             this.game_panel_img = frame.active_level.levels[frame.active_level.activeLevel - 1].getlevel_img();
 
             player.color = frame.settings_panel.color;
+
             player.playerImageinit();
 
             playerisHitted = false;
@@ -594,6 +592,8 @@ public class Game_Panel extends JPanel {
 
                 restoreLevel();
 
+                //frame.active_level.restartGame();
+
                 JOptionPane.showMessageDialog(frame, "You lose, try again!");
 
             } else if(win){
@@ -604,15 +604,9 @@ public class Game_Panel extends JPanel {
             }
             frame.active_level.enemiesLogicStart(inGame);
 
-
             //System.out.println("Status ingame false");
         }
-
-
     }
-
-
-
 }
 
 
