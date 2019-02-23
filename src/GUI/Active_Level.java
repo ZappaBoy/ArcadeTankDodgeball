@@ -33,10 +33,7 @@ public class Active_Level extends JPanel {
 
     public void paintComponents(Graphics g){
 
-//
-//        System.out.println("gameLevel: " + gameLevel);
-//
-//        System.out.println("enemiesNumber: " + enemiesNumber);
+
 
 
 
@@ -80,13 +77,11 @@ public class Active_Level extends JPanel {
 
             for (int i = 0; i < levels[activeLevel].enemies_number; i++){
 
-                //levels[activeLevel].enemies[i].isalive = true;
 
-                levels[activeLevel].enemies[i].initEnemyLogic();                     //inizializzare di nuovo il thread della logica
+                levels[activeLevel].enemies[i].initEnemyLogic();
 
                 levels[activeLevel].enemies[i].threadEnemylogic.start();
 
-               // System.out.println("enemylogicinit____________");
 
             }
         }else {
@@ -95,7 +90,6 @@ public class Active_Level extends JPanel {
             for (int i = 0; i < frame.active_level.enemiesNumber; i++){
 
 
-               // levels[activeLevel].enemies[i].initEnemyLogic();                     //inizializzare di nuovo il thread della logica
 
                 levels[activeLevel].enemies[i].isalive = false;
 

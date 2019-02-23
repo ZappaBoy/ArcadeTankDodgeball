@@ -42,8 +42,6 @@ public class Credits_Panel extends JPanel {
         g.drawImage(credits_panel_img, 0, 0, 800, 800, null);
 
 
-     //   g.setColor(Color.blue);
-       // g.fillRect(return_button.x, return_button.y, return_button.width, return_button.height);
 
 
     }

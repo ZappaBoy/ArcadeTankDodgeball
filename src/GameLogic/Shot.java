@@ -1,11 +1,9 @@
 package GameLogic;
 
-
 import Player.Player;
 import Utility.Resources;
+
 import java.awt.*;
-
-
 
 public class Shot extends Rectangle {
 
@@ -15,38 +13,36 @@ public class Shot extends Rectangle {
     public int y_shot;
     public int width_shot = 30;
     public int height_shot = 30;
+
     public int speed_movement = 15;
 
     private int x_frame = 800;
     private int y_frame = 800;
+
     public boolean hit = false;
     public boolean neverShotted = true;
 
     public Shot(Player player) {
 
-        x_shot = player.x + (player.getWidth()/2);
-        y_shot = player.y + (player.getHeight()/3);
-
-        width_shot = player.getWidth()/5*2;
-        width_shot = player.getHeight()/5*2;
-
+        x_shot = player.x + (player.getWidth() / 2);
+        y_shot = player.y + (player.getHeight() / 3);
+        width_shot = player.getWidth() / 5 * 2;
+        width_shot = player.getHeight() / 5 * 2;
 
     }
 
 
+    public boolean shotted(boolean isShotted) {
 
-    public boolean shotted(boolean isShotted){
-
-        if (neverShotted){
+        if (neverShotted) {
 
             bullet_img = Resources.getImage("/Resources/Bullet_Img_Player.png");
 
             neverShotted = false;
         }
 
-
         boolean end_shot;
-         end_shot = false;
+        end_shot = false;
 
         if (isShotted && !hit) {
 
@@ -60,21 +56,21 @@ public class Shot extends Rectangle {
             }
         }
 
-         return end_shot;
+        return end_shot;
     }
 
-    public void shotHit(){
+    public void shotHit() {
 
-      bullet_img = null;
+        bullet_img = null;
 
-      x_shot = 0;
-      y_shot = 0;
-      width_shot = 0;
-      height_shot = 0;
+        x_shot = 0;
+        y_shot = 0;
+        width_shot = 0;
+        height_shot = 0;
 
-      x_frame = 0;
-      y_frame = 0;
-      hit = true;
+        x_frame = 0;
+        y_frame = 0;
+        hit = true;
     }
 
 }

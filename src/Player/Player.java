@@ -4,12 +4,10 @@ import Utility.Resources;
 
 import java.awt.*;
 
-//import Game_Logic.Attack;
 
 
 public class Player {
 
-    //get e set
 
     public int x = 10;
     public int y = 360;
@@ -26,8 +24,6 @@ public class Player {
 
     public Image tank_img;
 
-    //
-   // private Attack attack_type;
 
 
  public Player (){
@@ -84,7 +80,6 @@ public class Player {
      if (color == 1){
 
          colore = "_Orange";
-       //  this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
 
      }
 
@@ -92,7 +87,6 @@ public class Player {
      if (color == 2){
 
             colore = "_Pink";
-      //   this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
 
      }
 
@@ -100,14 +94,12 @@ public class Player {
      if (color == 3){
 
             colore = "_Yellow";
-       //  this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
 
      }
 
       if (color == 4){
 
             colore = "_Green";
-           // this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
 
       }
 
@@ -115,7 +107,6 @@ public class Player {
       if (color == 5){
 
             colore = "_Red";
-          //  this.tank_img = Resources.getImage("/Resources/Player_Tank_Level" + level + colore + "_img.png" );
 
       }
 

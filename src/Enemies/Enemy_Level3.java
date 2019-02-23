@@ -2,30 +2,21 @@ package Enemies;
 
 import Utility.Resources;
 
-import java.awt.*;
 
 public class Enemy_Level3 extends Enemy {
 
-
-
-    public Enemy_Level3(){
+    public Enemy_Level3() {
 
         x = 720;
         y = 560;
         width = 80;
         height = 80;
-        level =3;
+        level = 3;
 
         up_collider = 3 + 260 + 260;
-        down_collider = 680 ;
+        down_collider = 680;
 
-
-        this.tank_img = Resources.getImage("/Resources/Enemy_Tank_Level3_Green_img.png" );
-    }
-
-    public Image getTank_img() {
-
-        return tank_img;
+        this.tank_img = Resources.getImage("/Resources/Enemy_Tank_Level3_Green_img.png");
     }
 
     public int getX() {
@@ -37,10 +28,12 @@ public class Enemy_Level3 extends Enemy {
 
         return y;
     }
+
     public int getHeight() {
 
         return height;
     }
+
     public int getWidth() {
 
         return width;

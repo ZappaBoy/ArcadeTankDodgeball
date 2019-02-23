@@ -1,8 +1,6 @@
 package Enemies;
 
 import GameLogic.Enemy_Shot;
-import Player.Player;
-
 
 import java.awt.*;
 import java.util.Random;
@@ -39,29 +37,24 @@ public class Enemy {
     public boolean firstShot = true;
 
 
-
     public void isHitted(boolean isHitted) {
 
         if (isHitted) {
 
-            if (life == 0){
+            if (life == 0) {
 
                 isalive = false;
-                //tank_img = null;
                 x = 800;
                 y = 800;
-//            height = 0;
-//            width = 0;
 
+            } else {
 
-            } else{
-
-                life --;
+                life--;
             }
         }
     }
 
-    public void initEnemyLogic(){
+    public void initEnemyLogic() {
 
         isalive = true;
         shotted_bullet = 0;
@@ -70,10 +63,10 @@ public class Enemy {
         threadEnemybullett = new threadEnemyShot[charger_capacity];
 
 
-        for (int i = 0; i < charger_capacity; i++){
+        for (int i = 0; i < charger_capacity; i++) {
 
-            enemyCharger[i] = new Enemy_Shot(x , y, width, height);
-            threadEnemybullett[i]= new threadEnemyShot();
+            enemyCharger[i] = new Enemy_Shot(x, y, width, height);
+            threadEnemybullett[i] = new threadEnemyShot();
         }
 
         threadEnemylogic = new threadEnemyAI();
@@ -92,7 +85,7 @@ public class Enemy {
 
                 movementLogic();
 
-                if (firstShot){
+                if (firstShot) {
 
                     try {
                         Thread.sleep(1500);
@@ -105,16 +98,13 @@ public class Enemy {
                     movementLogic();
                 }
 
-                if (shotted_bullet < charger_capacity){
+                if (shotted_bullet < charger_capacity) {
 
                     threadEnemybullett[shotted_bullet] = new threadEnemyShot();
 
                     threadEnemybullett[shotted_bullet].start();
 
-
-                } else{
-
-                   // System.out.println("reload Caricatore nemico" );
+                } else {
 
                     try {
                         Thread.sleep(300);
@@ -122,43 +112,33 @@ public class Enemy {
                         e.printStackTrace();
                     }
 
-                    //reload Cricatore Nemico
-
                     shotted_bullet = 0;
-
                 }
 
                 movementLogic();
 
                 try {
-                    Thread.sleep(1800); //1500
+                    Thread.sleep(1800);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
-                }
             }
         }
+    }
 
-
-
-
-        //PROBLEMA CON VELOCITA THREAD - SHOTTED_BULLETT VIENE INCREMENTATO PRIMA DELLA FINE DEL THREAD
 
     public class threadEnemyShot extends Thread implements Runnable {
 
         @Override
         public void run() {
 
-            // enemyCharger = new Enemy_Shot[charger_capacity];
-
-            //System.out.println(shotted_bullet);
 
             shotted_bullet++;
 
             enemyCharger[shotted_bullet - 1] = new Enemy_Shot(x, y, width, height);
 
-            while (!enemyCharger[shotted_bullet - 1].shotted() && !enemyCharger[shotted_bullet - 1].hit ){
+            while (!enemyCharger[shotted_bullet - 1].shotted() && !enemyCharger[shotted_bullet - 1].hit) {
 
                 try {
                     Thread.sleep(20);
@@ -169,7 +149,6 @@ public class Enemy {
 
             enemyCharger[shotted_bullet - 1].bullet_img = null;
 
-           // System.out.println("end " + shotted_bullet);
         }
     }
 
@@ -178,12 +157,7 @@ public class Enemy {
         Random random_direction = new Random();
         int direction;
 
-        int coeffcient;
-
         direction = random_direction.nextInt(4);
-
-        // coeffcient = random_direction.nextInt(4);
-
 
         if (direction == up && y > up_collider) {
 
@@ -195,7 +169,6 @@ public class Enemy {
 
             }
         }
-
 
         if (direction == down && y < down_collider) {
 
@@ -209,12 +182,10 @@ public class Enemy {
             }
         }
 
-
         if (direction == left && x >= left_collider) {
 
             x -= movement_speed;
         }
-
 
         if (direction == right && x < right_collider) {
 

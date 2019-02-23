@@ -73,7 +73,6 @@ public class Start_Panel extends JPanel {
 
         g.setColor(Color.BLACK);
         g.drawImage(start_panel_img, 0, 0, 800, 800, null );
-       // g.drawRect(settings_button.x, settings_button.y, settings_button.width, settings_button.height);
 
     }
 
@@ -115,7 +114,6 @@ public class Start_Panel extends JPanel {
     }
 
 
-    //keyboard listner
 
 
 }
