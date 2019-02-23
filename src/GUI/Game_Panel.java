@@ -43,12 +43,15 @@ public class Game_Panel extends JPanel {
     public boolean lose = false;
     public boolean win = false;
 
-
-
-
-
-
     private Image game_panel_img;
+
+    private Image ricarica_img;
+
+    private int ricarica_img_x = 800;
+    private int ricarica_img_y = 800;
+    private int ricarica_img_width = 0;
+    private int ricarica_img_height = 0;
+
 
     Game_Panel(ATD_Frame pframe) {
 
@@ -78,6 +81,7 @@ public class Game_Panel extends JPanel {
 
         frame.active_level.paintComponents(g);
 
+        g.drawImage(ricarica_img, ricarica_img_x, ricarica_img_y, ricarica_img_width, ricarica_img_height, null);
 
 
         //onDraw();
@@ -142,11 +146,11 @@ public class Game_Panel extends JPanel {
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 
 
-//                win = true;
-//
-//                inGame = false;
-//
-//                statusGamechange(false);
+                win = true;
+
+                inGame = false;
+
+                statusGamechange(false);
 
 
 
@@ -391,11 +395,22 @@ public class Game_Panel extends JPanel {
         @Override
         public void run() {
 
+            ricarica_img_y = 10;
+            ricarica_img_height = 75;
+            ricarica_img_width = 320;
+            ricarica_img_x = 400 - ricarica_img_width/2;
+
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
+
+            ricarica_img_x = 800;
+            ricarica_img_y = 800;
+            ricarica_img_height = 0;
+            ricarica_img_width = 0;
 
             shotted_bullet = 0;
 
@@ -619,6 +634,7 @@ public class Game_Panel extends JPanel {
                 changeFinalImageThread.start();
             }
 
+            ricarica_img = Resources.getImage("/Resources/Ricarica_img.png");
 
             player.color = frame.settings_panel.color;
 
