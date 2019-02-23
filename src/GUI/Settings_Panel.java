@@ -30,7 +30,6 @@ public class Settings_Panel extends JPanel {
     private HotArea boundary_rect = new HotArea();
 
 
-
     private static final int orange = 1;
 
     private static final int pink = 2;
@@ -104,8 +103,6 @@ public class Settings_Panel extends JPanel {
         this.boundary_rect.y = 800; //Asse y
         this.boundary_rect.width = 100; //Lunghezza
         this.boundary_rect.height = 100; //Altezza
-
-
     }
 
     @Override
@@ -114,12 +111,11 @@ public class Settings_Panel extends JPanel {
         g.drawImage(settings_panel_img, 0, 0, 800, 800, null);
 
         g.setColor(Color.black);
-        //g.fillRect(0, 0, 800, 800);
 
-        g.fillRect(color_button_orange.x - 5 , color_button_orange.y - 5, color_button_orange.width + 10, color_button_orange.height + 10);
+        g.fillRect(color_button_orange.x - 5, color_button_orange.y - 5, color_button_orange.width + 10, color_button_orange.height + 10);
         g.fillRect(color_button_pink.x - 5, color_button_pink.y - 5, color_button_pink.width + 10, color_button_pink.height + 10);
         g.fillRect(color_button_yellow.x - 5, color_button_yellow.y - 5, color_button_yellow.width + 10, color_button_yellow.height + 10);
-        g.fillRect(color_button_green.x - 5 , color_button_green.y - 5, color_button_green.width + 10, color_button_green.height + 10);
+        g.fillRect(color_button_green.x - 5, color_button_green.y - 5, color_button_green.width + 10, color_button_green.height + 10);
         g.fillRect(color_button_red.x - 5, color_button_red.y - 5, color_button_red.width + 10, color_button_red.height + 10);
         g.fillRect(color_button_blue.x - 5, color_button_blue.y - 5, color_button_blue.width + 10, color_button_blue.height + 10);
 
@@ -143,11 +139,6 @@ public class Settings_Panel extends JPanel {
 
         g.setColor(Color.blue);
         g.fillRect(color_button_blue.x, color_button_blue.y, color_button_blue.width, color_button_blue.height);
-
-
-        // g.setColor(Color.blue);
-        //g.fillRect(return_button.x, return_button.y, return_button.width, return_button.height);
-
     }
 
 
@@ -162,7 +153,7 @@ public class Settings_Panel extends JPanel {
                 frame.start_panel.setVisible(true);
                 frame.start_panel.setFocusable(true);
 
-            }else {
+            } else {
 
                 if (color_button_orange.contains(e.getPoint())) {
 
@@ -190,37 +181,37 @@ public class Settings_Panel extends JPanel {
                     boundary_rect.x -= 10;
                     boundary_rect.y -= 10;
                 }
+
+
+                if (color_button_green.contains(e.getPoint())) {
+
+                    color = green;
+                    boundary_rect.x = color_button_green.x;
+                    boundary_rect.y = color_button_green.y;
+                    boundary_rect.x -= 10;
+                    boundary_rect.y -= 10;
+                }
+
+                if (color_button_red.contains(e.getPoint())) {
+
+                    color = red;
+                    boundary_rect.x = color_button_red.x;
+                    boundary_rect.y = color_button_red.y;
+                    boundary_rect.x -= 10;
+                    boundary_rect.y -= 10;
+                }
+
+                if (color_button_blue.contains(e.getPoint())) {
+
+                    color = blue;
+                    boundary_rect.x = color_button_blue.x;
+                    boundary_rect.y = color_button_blue.y;
+                    boundary_rect.x -= 10;
+                    boundary_rect.y -= 10;
+                }
             }
 
-            if (color_button_green.contains(e.getPoint())) {
-
-                color = green;
-                boundary_rect.x = color_button_green.x;
-                boundary_rect.y = color_button_green.y;
-                boundary_rect.x -= 10;
-                boundary_rect.y -= 10;
-            }
-
-            if (color_button_red.contains(e.getPoint())) {
-
-                color = red;
-                boundary_rect.x = color_button_red.x;
-                boundary_rect.y = color_button_red.y;
-                boundary_rect.x -= 10;
-                boundary_rect.y -= 10;
-            }
-
-            if (color_button_blue.contains(e.getPoint())) {
-
-                color = blue;
-                boundary_rect.x = color_button_blue.x;
-                boundary_rect.y = color_button_blue.y;
-                boundary_rect.x -= 10;
-                boundary_rect.y -= 10;
-            }
-
-        repaint();
-
+            repaint();
         }
     }
 }

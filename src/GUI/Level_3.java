@@ -1,13 +1,11 @@
 package GUI;
 
-
 import Enemies.Enemy;
 import Enemies.Enemy_Level1;
 import Enemies.Enemy_Level2;
 import Enemies.Enemy_Level3;
 
-
-public class Level_3 extends Level{
+public class Level_3 extends Level {
 
     Level_3() {
         gameLevel = 3;

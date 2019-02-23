@@ -17,10 +17,7 @@ public class ATD_Frame extends JFrame {
 
     private boolean inGame = false;
 
-
-
     public ATD_Frame() {
-
 
         this.setSize(default_width, default_height);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,17 +33,15 @@ public class ATD_Frame extends JFrame {
 
         start_panel.setLocation(0, 0);
         game_panel.setLocation(0, 0);
-        active_level.setLocation(0,0);
+        active_level.setLocation(0, 0);
         credits_panel.setLocation(0, 0);
         settings_panel.setLocation(0, 0);
-
 
         this.getContentPane().add(active_level);
         this.getContentPane().add(start_panel);
         this.getContentPane().add(game_panel);
         this.getContentPane().add(credits_panel);
         this.getContentPane().add(settings_panel);
-
 
         start_panel.setVisible(true);
         game_panel.setVisible(false);
@@ -56,10 +51,10 @@ public class ATD_Frame extends JFrame {
 
     }
 
-    public void inGame(boolean isGaming){
+    public void inGame(boolean isGaming) {
 
 
-        if (isGaming){
+        if (isGaming) {
 
             this.start_panel.setVisible(false);
             this.game_panel.setVisible(true);
@@ -74,9 +69,7 @@ public class ATD_Frame extends JFrame {
             Thread threadGameRepaint = new repaintThread();
             threadGameRepaint.start();
 
-
-
-        }else{
+        } else {
 
             inGame = false;
 
@@ -84,17 +77,16 @@ public class ATD_Frame extends JFrame {
             this.game_panel.setVisible(false);
             this.active_level.setVisible(false);
 
-
         }
     }
 
 
-    private class repaintThread extends Thread implements Runnable{
+    private class repaintThread extends Thread implements Runnable {
 
         @Override
         public void run() {
 
-            while (true){
+            while (true) {
 
                 game_panel.repaint();
 

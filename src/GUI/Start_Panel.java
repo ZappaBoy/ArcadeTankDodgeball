@@ -1,15 +1,12 @@
 package GUI;
 
+import Utility.Resources;
 
-
-        import Utility.Resources;
-
-        import javax.swing.*;
-        import java.awt.*;
-        import java.awt.event.MouseAdapter;
-        import java.awt.event.MouseEvent;
-        import java.awt.Graphics;
-
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.Graphics;
 
 public class Start_Panel extends JPanel {
 
@@ -30,10 +27,10 @@ public class Start_Panel extends JPanel {
 
     private ATD_Frame frame;
 
-    Start_Panel(ATD_Frame pframe){
+    Start_Panel(ATD_Frame pframe) {
 
         //Inizializzazione Frame
-        this.setSize(800,800);
+        this.setSize(800, 800);
 
         frame = pframe;
 
@@ -62,7 +59,6 @@ public class Start_Panel extends JPanel {
         this.settings_button.width = 80; //Lunghezza
         this.settings_button.height = 90; //Altezza
 
-
         this.addMouseListener(new MyMouseListener());
 
         this.start_panel_img = Resources.getImage("/Resources/Start_Panel.png");
@@ -70,13 +66,9 @@ public class Start_Panel extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
-
         g.setColor(Color.BLACK);
-        g.drawImage(start_panel_img, 0, 0, 800, 800, null );
-
+        g.drawImage(start_panel_img, 0, 0, 800, 800, null);
     }
-
-
 
 
     private class MyMouseListener extends MouseAdapter {
@@ -84,10 +76,9 @@ public class Start_Panel extends JPanel {
         @Override
         public void mouseReleased(MouseEvent e) {
 
-
             if (start_button.contains(e.getPoint())) {
 
-               frame.inGame(true);
+                frame.inGame(true);
 
             }
 
@@ -112,9 +103,5 @@ public class Start_Panel extends JPanel {
             }
         }
     }
-
-
-
-
 }
 

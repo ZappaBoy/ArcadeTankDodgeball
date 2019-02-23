@@ -9,13 +9,11 @@ import java.awt.event.MouseEvent;
 
 public class Credits_Panel extends JPanel {
 
-
     public Image credits_panel_img;
 
     private ATD_Frame frame;
 
     private HotArea return_button = new HotArea();
-
 
     Credits_Panel(ATD_Frame pframe) {
 
@@ -33,16 +31,12 @@ public class Credits_Panel extends JPanel {
         this.return_button.width = 350; //Lunghezza
         this.return_button.height = 90; //Altezza
 
-
     }
 
     @Override
     protected void paintComponent(Graphics g) {
 
         g.drawImage(credits_panel_img, 0, 0, 800, 800, null);
-
-
-
 
     }
 
@@ -56,7 +50,6 @@ public class Credits_Panel extends JPanel {
                 frame.credits_panel.setVisible(false);
                 frame.start_panel.setVisible(true);
                 frame.start_panel.setFocusable(true);
-
             }
         }
     }

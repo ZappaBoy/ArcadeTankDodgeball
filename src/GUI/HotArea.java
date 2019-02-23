@@ -4,11 +4,6 @@ import java.awt.*;
 
 class HotArea extends Rectangle {
 
-
-
-
-
-
 }
 
 

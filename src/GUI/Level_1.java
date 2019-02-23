@@ -4,8 +4,7 @@ package GUI;
 import Enemies.Enemy;
 import Enemies.Enemy_Level1;
 
-public class Level_1 extends Level{
-
+public class Level_1 extends Level {
 
     Level_1() {
         gameLevel = 1;
@@ -17,7 +16,5 @@ public class Level_1 extends Level{
         enemies = new Enemy[getEnemies_number()];
 
         enemies[0] = new Enemy_Level1();
-
-
     }
 }
