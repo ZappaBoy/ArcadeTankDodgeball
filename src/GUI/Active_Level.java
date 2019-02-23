@@ -33,10 +33,10 @@ public class Active_Level extends JPanel {
 
     public void paintComponents(Graphics g){
 
-
-        System.out.println("gameLevel: " + gameLevel);
-
-        System.out.println("enemiesNumber: " + enemiesNumber);
+//
+//        System.out.println("gameLevel: " + gameLevel);
+//
+//        System.out.println("enemiesNumber: " + enemiesNumber);
 
 
 
@@ -46,7 +46,7 @@ public class Active_Level extends JPanel {
 
             for (int j = 0; j < levels[activeLevel - 1].enemies[i].charger_capacity; j++){
 
-                if (!frame.game_panel.lose){
+                if (!frame.game_panel.lose && frame.game_panel.inGame){
 
                     if (!levels[gameLevel - 1].enemies[i].enemyCharger[j].hit){
 

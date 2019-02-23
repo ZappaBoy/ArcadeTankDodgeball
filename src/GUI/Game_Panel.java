@@ -407,15 +407,14 @@ public class Game_Panel extends JPanel {
             }
 
 
-            ricarica_img_x = 800;
-            ricarica_img_y = 800;
-            ricarica_img_height = 0;
-            ricarica_img_width = 0;
-
             shotted_bullet = 0;
 
             used_charger++;
 
+            ricarica_img_x = 800;
+            ricarica_img_y = 800;
+            ricarica_img_height = 0;
+            ricarica_img_width = 0;
           //  System.out.println("Caricatori usati: " + used_charger);
 
             //scritta ricarica
@@ -490,7 +489,12 @@ public class Game_Panel extends JPanel {
 
             Active_Level restore = new Active_Level(frame);
 
-            frame.active_level.levels[frame.active_level.activeLevel - 1].enemies = restore.levels[frame.active_level.activeLevel - 1].enemies;
+            //opzione gioco riparte dal primo livello
+            frame.active_level = restore;
+
+            //opzione gioco continua
+
+//            frame.active_level.levels[frame.active_level.activeLevel - 1].enemies = restore.levels[frame.active_level.activeLevel - 1].enemies;
 
         }
     }

@@ -131,7 +131,7 @@ public class Enemy {
                 movementLogic();
 
                 try {
-                    Thread.sleep(1500);
+                    Thread.sleep(1800); //1500
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

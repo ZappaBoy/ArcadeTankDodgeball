@@ -14,7 +14,7 @@ public class Enemy_Shot {
     public int y_shot = 800;
     public int width_shot = 30;
     public int height_shot = 30;
-    public int speed_movement = 15;
+    public int speed_movement = 13; //15
     private boolean neverShotted = true;
     public boolean hit = false;
 
