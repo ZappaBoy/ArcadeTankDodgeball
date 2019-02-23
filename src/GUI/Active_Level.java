@@ -13,9 +13,9 @@ public class Active_Level extends JPanel {
 
     public Level[] levels;
 
-    public int levels_numbers = 4;
+    public int levels_number = 4;
 
-    public int activeLevel = 1; //active level deve esere = 0
+    public int activeLevel = 0;
 
 
     Active_Level(ATD_Frame pframe){
@@ -23,7 +23,7 @@ public class Active_Level extends JPanel {
         this.setSize(800, 800);
 
         frame = pframe;
-        levels = new Level[levels_numbers];
+        levels = new Level[levels_number];
         levels[0] = new Level_1();
         levels[1] = new Level_2();
         levels[2] = new Level_3();
@@ -42,15 +42,15 @@ public class Active_Level extends JPanel {
 
         for (int i = 0; i < enemiesNumber; i++){
 
-            g.drawImage(levels[gameLevel - 1].enemies[i].tank_img, levels[gameLevel - 1].enemies[i].x, levels[gameLevel - 1].enemies[i].y, levels[gameLevel - 1].enemies[i].width, levels[gameLevel - 1].enemies[i].height, null );
+            g.drawImage(levels[activeLevel].enemies[i].tank_img, levels[activeLevel].enemies[i].x, levels[activeLevel].enemies[i].y, levels[activeLevel].enemies[i].width, levels[activeLevel].enemies[i].height, null );
 
-            for (int j = 0; j < levels[activeLevel - 1].enemies[i].charger_capacity; j++){
+            for (int j = 0; j < levels[activeLevel].enemies[i].charger_capacity; j++){
 
                 if (!frame.game_panel.lose && frame.game_panel.inGame){
 
-                    if (!levels[gameLevel - 1].enemies[i].enemyCharger[j].hit){
+                    if (!levels[activeLevel].enemies[i].enemyCharger[j].hit){
 
-                        g.drawImage(levels[gameLevel - 1].enemies[i].enemyCharger[j].bullet_img, levels[gameLevel - 1].enemies[i].enemyCharger[j].x_shot, levels[gameLevel - 1].enemies[i].enemyCharger[j].y_shot, levels[gameLevel - 1].enemies[i].enemyCharger[j].width_shot, levels[gameLevel - 1].enemies[i].enemyCharger[j].height_shot, null );
+                        g.drawImage(levels[activeLevel].enemies[i].enemyCharger[j].bullet_img, levels[activeLevel].enemies[i].enemyCharger[j].x_shot, levels[activeLevel].enemies[i].enemyCharger[j].y_shot, levels[activeLevel].enemies[i].enemyCharger[j].width_shot, levels[activeLevel].enemies[i].enemyCharger[j].height_shot, null );
 
                     }
                 }
@@ -60,25 +60,16 @@ public class Active_Level extends JPanel {
 
     public void nextLevel() {
 
-        if (gameLevel < levels_numbers) {
+        if (gameLevel < levels_number) {
 
 
             gameLevel++;
             activeLevel++;
-            enemiesNumber = levels[activeLevel - 1].getEnemies_number();
+            enemiesNumber = levels[activeLevel].getEnemies_number();
 
         }
 
 
-
-    }
-
-    public void restartGame() {
-
-
-            gameLevel++;
-            activeLevel++;
-            enemiesNumber = levels[activeLevel - 1].getEnemies_number();
 
     }
 
@@ -87,13 +78,13 @@ public class Active_Level extends JPanel {
 
         if (ingame){
 
-            for (int i = 0; i < levels[activeLevel - 1].enemies_number; i++){
+            for (int i = 0; i < levels[activeLevel].enemies_number; i++){
 
-                //levels[activeLevel - 1].enemies[i].isalive = true;
+                //levels[activeLevel].enemies[i].isalive = true;
 
-                levels[activeLevel - 1].enemies[i].initEnemyLogic();                     //inizializzare di nuovo il thread della logica
+                levels[activeLevel].enemies[i].initEnemyLogic();                     //inizializzare di nuovo il thread della logica
 
-                levels[activeLevel - 1].enemies[i].threadEnemylogic.start();
+                levels[activeLevel].enemies[i].threadEnemylogic.start();
 
                // System.out.println("enemylogicinit____________");
 
@@ -104,9 +95,9 @@ public class Active_Level extends JPanel {
             for (int i = 0; i < frame.active_level.enemiesNumber; i++){
 
 
-               // levels[activeLevel - 1].enemies[i].initEnemyLogic();                     //inizializzare di nuovo il thread della logica
+               // levels[activeLevel].enemies[i].initEnemyLogic();                     //inizializzare di nuovo il thread della logica
 
-                levels[activeLevel - 1].enemies[i].isalive = false;
+                levels[activeLevel].enemies[i].isalive = false;
 
             }
 

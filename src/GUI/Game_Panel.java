@@ -54,6 +54,7 @@ public class Game_Panel extends JPanel {
     private int ricarica_img_width = 0;
     private int ricarica_img_height = 0;
 
+    private Active_Level restore;
 
     Game_Panel(ATD_Frame pframe) {
 
@@ -134,6 +135,10 @@ public class Game_Panel extends JPanel {
             down_collider = 700;
 
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+
+                System.out.println("gameLVL " + frame.active_level.gameLevel);
+                System.out.println("activeLVL " + frame.active_level.activeLevel);
+
 
                 leftPressed = true;
 
@@ -309,7 +314,7 @@ public class Game_Panel extends JPanel {
 
                     while (i < frame.active_level.enemiesNumber && !charger[active_shot].hit ) {
 
-                        if (frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].isalive && enemyHit(frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i], charger[active_shot])) {
+                        if (frame.active_level.levels[frame.active_level.activeLevel].enemies[i].isalive && enemyHit(frame.active_level.levels[frame.active_level.activeLevel].enemies[i], charger[active_shot])) {
 
 //                            enemy_tank_hitted++;
 
@@ -319,15 +324,15 @@ public class Game_Panel extends JPanel {
 
                             charger[active_shot].shotHit();
 
-                            if (frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].life >= 0){
+                            if (frame.active_level.levels[frame.active_level.activeLevel].enemies[i].life >= 0){
 
-                                frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].isHitted(true);
+                                frame.active_level.levels[frame.active_level.activeLevel].enemies[i].isHitted(true);
 
 
 
                             }
 
-                            if (frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].life == 0){
+                            if (frame.active_level.levels[frame.active_level.activeLevel].enemies[i].life == 0){
 
                                 enemy_tank_hitted++;
 
@@ -528,22 +533,23 @@ public class Game_Panel extends JPanel {
 
     private void restoreLevel() {
 
-        for (int i = 0; i < frame.active_level.levels[frame.active_level.activeLevel - 1].enemies_number; i++) {
 
-            Active_Level restore = new Active_Level(frame);
+         restore = new Active_Level(frame);
 
             //opzione gioco riparte dal primo livello
-            frame.active_level = restore;
+        frame.active_level = restore;
 
-            frame.active_level.gameLevel = 1;
-            frame.active_level.activeLevel = 1; //0
-            frame.active_level.enemiesNumber = frame.active_level.levels[frame.active_level.activeLevel - 1].enemies_number;
+        System.out.println("restored");
+
+//            frame.active_level.gameLevel = 1;
+//            frame.active_level.activeLevel = 1; //0
+//            frame.active_level.enemiesNumber = frame.active_level.levels[frame.active_level.activeLevel].enemies_number;
 
             //opzione gioco continua
+      //  for (int i = 0; i < frame.active_level.levels[frame.active_level.activeLevel].enemies_number; i++) {
+//            frame.active_level.levels[frame.active_level.activeLevel].enemies = restore.levels[frame.active_level.activeLevel].enemies;
 
-//            frame.active_level.levels[frame.active_level.activeLevel - 1].enemies = restore.levels[frame.active_level.activeLevel - 1].enemies;
-
-        }
+      //  }
     }
 
 
@@ -554,7 +560,7 @@ public class Game_Panel extends JPanel {
         public void run() {
             boolean change = true;
 
-            while (frame.active_level.gameLevel == frame.active_level.levels_numbers && inGame) {
+            while (frame.active_level.gameLevel == frame.active_level.levels_number && inGame) {
 
                 if (change) {
 
@@ -593,9 +599,9 @@ public class Game_Panel extends JPanel {
 
                 //System.out.println("ThreadPlayerHitted");
 
-                    for (int i = 0; i < frame.active_level.levels[frame.active_level.activeLevel - 1].enemies_number; i++) {
+                    for (int i = 0; i < frame.active_level.levels[frame.active_level.activeLevel].enemies_number; i++) {
 
-                        for (int j = 0; j < frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].charger_capacity; j++) {
+                        for (int j = 0; j < frame.active_level.levels[frame.active_level.activeLevel].enemies[i].charger_capacity; j++) {
 
                             // System.out.println("active_level " + frame.active_level.activeLevel + "i: " + i + "j: " + j);
 
@@ -603,16 +609,16 @@ public class Game_Panel extends JPanel {
 
                             if (!playerisHitted) {
 
-                                //System.out.println("Enemies: " + i + " EnemyCharger: " + j  + "Hit: " + frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].hit );
+                                //System.out.println("Enemies: " + i + " EnemyCharger: " + j  + "Hit: " + frame.active_level.levels[frame.active_level.activeLevel].enemies[i].enemyCharger[j].hit );
 
-                                if (!frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].hit) {
+                                if (!frame.active_level.levels[frame.active_level.activeLevel].enemies[i].enemyCharger[j].hit) {
 
-                                   // if ((frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].x_shot >= player.x && frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].x_shot <= player.x + player.getWidth()) && (frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].y_shot >= player.y && frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].y_shot <= player.y + player.getHeight())) {
+                                   // if ((frame.active_level.levels[frame.active_level.activeLevel].enemies[i].enemyCharger[j].x_shot >= player.x && frame.active_level.levels[frame.active_level.activeLevel].enemies[i].enemyCharger[j].x_shot <= player.x + player.getWidth()) && (frame.active_level.levels[frame.active_level.activeLevel].enemies[i].enemyCharger[j].y_shot >= player.y && frame.active_level.levels[frame.active_level.activeLevel].enemies[i].enemyCharger[j].y_shot <= player.y + player.getHeight())) {
 
-                                    if (playerHit(player, frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j])){
+                                    if (playerHit(player, frame.active_level.levels[frame.active_level.activeLevel].enemies[i].enemyCharger[j])){
                                         //System.out.println("PlayerHitted");
 
-                                        frame.active_level.levels[frame.active_level.activeLevel - 1].enemies[i].enemyCharger[j].hit = true;
+                                        frame.active_level.levels[frame.active_level.activeLevel].enemies[i].enemyCharger[j].hit = true;
 
                                         playerisHitted = true;
 
@@ -656,11 +662,7 @@ public class Game_Panel extends JPanel {
 
             shotted_bullet = 0;
 
-            lose = false;
-
-            win = false;
-
-            if (frame.active_level.activeLevel == 1 && !playerisHitted){
+            if (frame.active_level.gameLevel == 1 && !win){
 
                 player = new Player();
 
@@ -674,9 +676,9 @@ public class Game_Panel extends JPanel {
 
             }
 
-            if (frame.active_level.gameLevel < frame.active_level.levels_numbers){
+            if (frame.active_level.gameLevel < frame.active_level.levels_number){
 
-                this.game_panel_img = frame.active_level.levels[frame.active_level.activeLevel - 1].getlevel_img();
+                this.game_panel_img = frame.active_level.levels[frame.active_level.activeLevel].getlevel_img();
 
             } else {
 
@@ -690,6 +692,10 @@ public class Game_Panel extends JPanel {
             player.color = frame.settings_panel.color;
 
             player.playerImageinit();
+
+            lose = false;
+
+            win = false;
 
             playerisHitted = false;
 
@@ -733,17 +739,27 @@ public class Game_Panel extends JPanel {
 
                 }
 
+                //frame.active_level.nextLevel();
 
+                if (frame.active_level.gameLevel >= frame.active_level.levels_number ){
 
-                if (frame.active_level.gameLevel >= frame.active_level.levels_numbers){
+                    JOptionPane.showMessageDialog(frame, "You finish all levels. Congratulation!");
 
                     restoreLevel();
+
+                    System.out.println("active " + frame.active_level.activeLevel);
+                    System.out.println("game " + frame.active_level.gameLevel);
+
 
                 }else{
 
                     frame.active_level.nextLevel();
 
+                    System.out.println("NextLVL");
+
                 }
+
+
 
             }
             frame.active_level.enemiesLogicStart(inGame);
