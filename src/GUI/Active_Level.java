@@ -18,7 +18,7 @@ public class Active_Level extends JPanel {
     public int activeLevel = 0;
 
 
-    Active_Level(ATD_Frame pframe){
+    Active_Level(ATD_Frame pframe) {
 
         this.setSize(800, 800);
 
@@ -31,23 +31,20 @@ public class Active_Level extends JPanel {
     }
 
 
-    public void paintComponents(Graphics g){
+    public void paintComponents(Graphics g) {
 
 
+        for (int i = 0; i < enemiesNumber; i++) {
 
+            g.drawImage(levels[activeLevel].enemies[i].tank_img, levels[activeLevel].enemies[i].x, levels[activeLevel].enemies[i].y, levels[activeLevel].enemies[i].width, levels[activeLevel].enemies[i].height, null);
 
+            for (int j = 0; j < levels[activeLevel].enemies[i].charger_capacity; j++) {
 
-        for (int i = 0; i < enemiesNumber; i++){
+                if (!frame.game_panel.lose && frame.game_panel.inGame) {
 
-            g.drawImage(levels[activeLevel].enemies[i].tank_img, levels[activeLevel].enemies[i].x, levels[activeLevel].enemies[i].y, levels[activeLevel].enemies[i].width, levels[activeLevel].enemies[i].height, null );
+                    if (!levels[activeLevel].enemies[i].enemyCharger[j].hit) {
 
-            for (int j = 0; j < levels[activeLevel].enemies[i].charger_capacity; j++){
-
-                if (!frame.game_panel.lose && frame.game_panel.inGame){
-
-                    if (!levels[activeLevel].enemies[i].enemyCharger[j].hit){
-
-                        g.drawImage(levels[activeLevel].enemies[i].enemyCharger[j].bullet_img, levels[activeLevel].enemies[i].enemyCharger[j].x_shot, levels[activeLevel].enemies[i].enemyCharger[j].y_shot, levels[activeLevel].enemies[i].enemyCharger[j].width_shot, levels[activeLevel].enemies[i].enemyCharger[j].height_shot, null );
+                        g.drawImage(levels[activeLevel].enemies[i].enemyCharger[j].bullet_img, levels[activeLevel].enemies[i].enemyCharger[j].x_shot, levels[activeLevel].enemies[i].enemyCharger[j].y_shot, levels[activeLevel].enemies[i].enemyCharger[j].width_shot, levels[activeLevel].enemies[i].enemyCharger[j].height_shot, null);
 
                     }
                 }
@@ -67,15 +64,14 @@ public class Active_Level extends JPanel {
         }
 
 
-
     }
 
 
-    public void enemiesLogicStart(boolean ingame){
+    public void enemiesLogicStart(boolean ingame) {
 
-        if (ingame){
+        if (ingame) {
 
-            for (int i = 0; i < levels[activeLevel].enemies_number; i++){
+            for (int i = 0; i < levels[activeLevel].enemies_number; i++) {
 
 
                 levels[activeLevel].enemies[i].initEnemyLogic();
@@ -84,11 +80,10 @@ public class Active_Level extends JPanel {
 
 
             }
-        }else {
+        } else {
 
 
-            for (int i = 0; i < frame.active_level.enemiesNumber; i++){
-
+            for (int i = 0; i < frame.active_level.enemiesNumber; i++) {
 
 
                 levels[activeLevel].enemies[i].isalive = false;
@@ -97,7 +92,6 @@ public class Active_Level extends JPanel {
 
         }
     }
-
 
 
 }
