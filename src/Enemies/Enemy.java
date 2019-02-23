@@ -114,7 +114,7 @@ public class Enemy {
 
                 } else{
 
-                   // System.out.println("Ricarica Caricatore nemico" );
+                   // System.out.println("recharge Caricatore nemico" );
 
                     try {
                         Thread.sleep(300);
@@ -122,7 +122,7 @@ public class Enemy {
                         e.printStackTrace();
                     }
 
-                    //Ricarica Cricatore Nemico
+                    //recharge Cricatore Nemico
 
                     shotted_bullet = 0;
 

@@ -47,6 +47,8 @@ public class Game_Panel extends JPanel {
 
     private Image ricarica_img;
 
+    private boolean ricarica = false;
+
     private int ricarica_img_x = 800;
     private int ricarica_img_y = 800;
     private int ricarica_img_width = 0;
@@ -281,7 +283,7 @@ public class Game_Panel extends JPanel {
                 //System.out.println(shotted_bullet + ";" + active_shot );
 
                 if (shotted_bullet >= charger_capacity){
-                    Thread ricaricaThread = new RicaricaThread();
+                    Thread ricaricaThread = new recharge();
 
                     ricaricaThread.start();
                 }
@@ -390,15 +392,23 @@ public class Game_Panel extends JPanel {
     /**
      *     Thread ricarica colpi caricatore
      */
-    public class RicaricaThread extends Thread implements Runnable{   //TODO: Scritta ricarica
+    public class recharge extends Thread implements Runnable{
 
         @Override
         public void run() {
 
+
+            ricarica = true;
             ricarica_img_y = 10;
             ricarica_img_height = 75;
             ricarica_img_width = 320;
             ricarica_img_x = 400 - ricarica_img_width/2;
+
+          //  ricarica_img = Resources.getImage("/Resources/Ricarica_img_0.png");
+
+            Thread changeRechargeImageThread = new changeRechargeImage();
+
+            changeRechargeImageThread.start();
 
             try {
                 Thread.sleep(2000);
@@ -411,17 +421,49 @@ public class Game_Panel extends JPanel {
 
             used_charger++;
 
+
             ricarica_img_x = 800;
             ricarica_img_y = 800;
             ricarica_img_height = 0;
             ricarica_img_width = 0;
+
+            ricarica = false;
           //  System.out.println("Caricatori usati: " + used_charger);
 
-            //scritta ricarica
+
         }
     }
 
+    /**
+     *     Thread ricarica colpi caricatore
+     */
+    public class changeRechargeImage extends Thread implements Runnable{
 
+        @Override
+        public void run() {
+
+            boolean change = true;
+
+            while (ricarica) {
+
+                if (change) {
+                    ricarica_img = Resources.getImage("/Resources/Ricarica_img_0.png");
+
+                }else {
+
+
+                    ricarica_img = Resources.getImage("/Resources/Ricarica_img_1.png");
+                }
+
+                change = !change;
+                try {
+                    Thread.sleep(400);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
 
 
@@ -639,7 +681,7 @@ public class Game_Panel extends JPanel {
                 changeFinalImageThread.start();
             }
 
-            ricarica_img = Resources.getImage("/Resources/Ricarica_img.png");
+            ricarica_img = Resources.getImage("/Resources/Ricarica_img_0.png");
 
             player.color = frame.settings_panel.color;
 
