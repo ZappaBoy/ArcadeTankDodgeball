@@ -16,7 +16,7 @@ public class Game_Panel extends JPanel {
     public Player player;
 
 
-    public int charger_capacity = 3;
+    public int charger_capacity = 4; //3
     public int shotted_bullet = 0;
     public Shot[] charger;
     public threadPlayerBullet[] chargerThread;
@@ -34,7 +34,7 @@ public class Game_Panel extends JPanel {
     public boolean firstShot = true;
 
 
-    public Thread thread_Delay = new threadDelay();
+    public Thread thread_ShotDelay = new shotDelay();
 
     public boolean playerisHitted = false;
 
@@ -194,7 +194,7 @@ public class Game_Panel extends JPanel {
 
                 if (firstShot){
 
-                    thread_Delay.start();
+                    thread_ShotDelay.start();
 
                     firstShot = false;
 
@@ -264,7 +264,7 @@ public class Game_Panel extends JPanel {
         public void run() {
 
 
-            //thread_Delay = new threadDelay();
+            //thread_ShotDelay = new threadDelay();
 
 
 
@@ -428,14 +428,14 @@ public class Game_Panel extends JPanel {
     /**
      *     thread delay tra colpi caricatore
      */
-    public class threadDelay extends Thread implements Runnable{
+    public class shotDelay extends Thread implements Runnable{
 
         @Override
         public void run() {
 
             while (inGame){
 
-                readyToshot = !readyToshot;
+                //readyToshot = !readyToshot;
 
                 try {
                     Thread.sleep(1000);
@@ -443,6 +443,7 @@ public class Game_Panel extends JPanel {
                     e.printStackTrace();
                 }
                 //System.out.println("delay: " + readyToshot);
+                readyToshot = !readyToshot;
             }
 
         }
@@ -659,7 +660,7 @@ public class Game_Panel extends JPanel {
 
             thread_PlayerHitted.start();
 
-            thread_Delay = new threadDelay();
+            thread_ShotDelay = new shotDelay();
 
 
             //System.out.println("Status ingame true");
