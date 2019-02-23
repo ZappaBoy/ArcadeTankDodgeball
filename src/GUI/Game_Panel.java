@@ -283,7 +283,7 @@ public class Game_Panel extends JPanel {
                 //System.out.println(shotted_bullet + ";" + active_shot );
 
                 if (shotted_bullet >= charger_capacity){
-                    Thread ricaricaThread = new recharge();
+                    Thread ricaricaThread = new reload();
 
                     ricaricaThread.start();
                 }
@@ -392,7 +392,7 @@ public class Game_Panel extends JPanel {
     /**
      *     Thread ricarica colpi caricatore
      */
-    public class recharge extends Thread implements Runnable{
+    public class reload extends Thread implements Runnable{
 
         @Override
         public void run() {
@@ -406,7 +406,7 @@ public class Game_Panel extends JPanel {
 
           //  ricarica_img = Resources.getImage("/Resources/Ricarica_img_0.png");
 
-            Thread changeRechargeImageThread = new changeRechargeImage();
+            Thread changeRechargeImageThread = new changeReloadImage();
 
             changeRechargeImageThread.start();
 
@@ -437,7 +437,7 @@ public class Game_Panel extends JPanel {
     /**
      *     Thread ricarica colpi caricatore
      */
-    public class changeRechargeImage extends Thread implements Runnable{
+    public class changeReloadImage extends Thread implements Runnable{
 
         @Override
         public void run() {
@@ -534,6 +534,10 @@ public class Game_Panel extends JPanel {
 
             //opzione gioco riparte dal primo livello
             frame.active_level = restore;
+
+            frame.active_level.gameLevel = 1;
+            frame.active_level.activeLevel = 1; //0
+            frame.active_level.enemiesNumber = frame.active_level.levels[frame.active_level.activeLevel - 1].enemies_number;
 
             //opzione gioco continua
 
@@ -721,7 +725,7 @@ public class Game_Panel extends JPanel {
 
                 JOptionPane.showMessageDialog(frame, "You lose, try again!");
 
-            } else if(win){
+            } else {
 
                 if (player.level < player.maxLevel){
 
@@ -729,7 +733,18 @@ public class Game_Panel extends JPanel {
 
                 }
 
-                frame.active_level.nextLevel();
+
+
+                if (frame.active_level.gameLevel >= frame.active_level.levels_numbers){
+
+                    restoreLevel();
+
+                }else{
+
+                    frame.active_level.nextLevel();
+
+                }
+
             }
             frame.active_level.enemiesLogicStart(inGame);
 

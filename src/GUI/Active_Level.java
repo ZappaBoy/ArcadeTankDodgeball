@@ -67,10 +67,10 @@ public class Active_Level extends JPanel {
             activeLevel++;
             enemiesNumber = levels[activeLevel - 1].getEnemies_number();
 
-        }else{
-
-            JOptionPane.showMessageDialog(frame, "You complete all levels!");
         }
+
+
+
     }
 
     public void restartGame() {
